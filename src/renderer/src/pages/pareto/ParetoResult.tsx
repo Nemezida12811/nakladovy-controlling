@@ -4,14 +4,14 @@ import { useAppSelector } from '../../store/hooks';
 import { selectors } from './paretoSlice';
 import Spacer from '@renderer/components/Spacer';
 import SectionTitle from '@renderer/components/SectionTitle';
-import { Paper } from '@mui/material';
+import { Paper, Table, TableCell} from '@mui/material';
 import BarWithLineGraph from '@renderer/components/graph/BarWithLineGraph';
 
 export default function ParetoResult() {
   const data = useAppSelector(selectors.data);
   const items = useAppSelector(selectors.items);
 
-  const { values, valuesKumul, percentagesKumul, percentages, causes } =
+  const { values, valuesKumul, percentagesKumul, percentages, causes, sum } =
     paretoCalculation(data as number[][], items);
 
   return (
@@ -43,6 +43,14 @@ export default function ParetoResult() {
             ];
           })}
         />
+
+        <Table>
+          <TableCell align="left" sx={{borderRight: '1px solid #ddd', width: "170px" }}>
+            Nc náklady celkové (€)
+          </TableCell>
+          <TableCell align="center" sx={{width: "152px", borderRight: '1px solid #ddd'}}>{sum}</TableCell>
+          <TableCell></TableCell>
+        </Table>
       </Paper>
 
       <Spacer height={40} hideInPrint />
@@ -71,6 +79,12 @@ export default function ParetoResult() {
             stroke: 'red',
             width: 46,
             y: '80',
+          },
+          {
+            label: '95%',
+            stroke: 'red',
+            width: 46,
+            y: '95',
           },
         ]}
       />

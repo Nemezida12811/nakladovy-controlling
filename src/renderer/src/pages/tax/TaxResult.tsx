@@ -29,7 +29,6 @@ const TaxResult = () => {
 
   const year = additionalData?.year ?? '';
   const tax = additionalData?.tax ?? 0;
-  const income = additionalData?.income ?? 0;
 
   const {
     uznaneNakladySum,
@@ -39,7 +38,8 @@ const TaxResult = () => {
     vysledokHospodareniaDanovy,
     rozdielVysledkuHodpodarenia,
     danovaPovinnost,
-  } = taxCalculation(data as number[][], tax, income);
+    vynosySum,
+  } = taxCalculation(data as number[][], tax);
 
   const handleYearChange = (value: string) => {
     dispatch(
@@ -54,15 +54,6 @@ const TaxResult = () => {
     dispatch(
       taxActions.setAdditionalData({
         key: 'tax',
-        value,
-      }),
-    );
-  };
-
-  const handleIncomeChange = (value: string) => {
-    dispatch(
-      taxActions.setAdditionalData({
-        key: 'income',
         value,
       }),
     );
@@ -120,23 +111,6 @@ const TaxResult = () => {
             type="number"
           />
         </InputWrapper>
-
-        <InputWrapper>
-          <YearLabel>Výnosy</YearLabel>
-          <TextField
-            sx={{
-              background: (theme) => theme.palette.background.paper,
-            }}
-            inputProps={{
-              style: {
-                textAlign: 'center',
-              },
-            }}
-            onChange={(e) => handleIncomeChange(e.target.value)}
-            value={income}
-            type="number"
-          />
-        </InputWrapper>
       </Box>
 
       <Spacer height={40} />
@@ -162,14 +136,18 @@ const TaxResult = () => {
               `\\(VH_{ú} = V - NC \\)`,
             ],
             [
-              '(VH<sub>d</sub>) - výsledok hospodárenia daňový (€)',
+              '(VH<sub>d</sub>) - výsledok hospodárenia daňový (€) - základ dane ',
               `\\(VH_{d} = V - N_{du} \\)`,
             ],
+            ['(Daň) - daňová povinnosť', `\\(DP = (VH_{d} * DS) / 100 \\)`],
             [
               '(AD) - rozdiel výsledku hospodárenia (€)',
               `\\(AD = VH_{ú} - VH_{d} \\)`,
             ],
-            ['(Daň) - daňová povinnosť', `\\(DP = (VH_{d} * DS) / 100 \\)`],
+            [
+              '(VC) - vynosy celkové (€)',
+              '\\(VC = \\sum vynosy \\)',
+            ],
           ]}
           data={[
             [uznaneNakladySum],
@@ -177,8 +155,9 @@ const TaxResult = () => {
             [nakladyCelkove],
             [vysledokHospodareniaUctovny],
             [vysledokHospodareniaDanovy],
-            [rozdielVysledkuHodpodarenia],
             [danovaPovinnost],
+            [rozdielVysledkuHodpodarenia],
+            [vynosySum],
           ]}
           newPageAfter={false}
         />

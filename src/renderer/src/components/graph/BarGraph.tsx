@@ -37,6 +37,7 @@ type Props = {
   xAxisFontSize?: number;
   customColors?: string[];
   barTextColor?: string;
+  labelsOnTop?: boolean;
 };
 
 const BarGraph: React.FC<Props> = ({
@@ -51,6 +52,7 @@ const BarGraph: React.FC<Props> = ({
   yAxisFontSize = 12,
   xAxisFontSize = 12,
   customColors = [],
+  labelsOnTop = false,
   barTextColor,
 }) => {
   const {
@@ -101,13 +103,16 @@ const BarGraph: React.FC<Props> = ({
 
           {data.map((d, index) => (
             <Bar dataKey={d.name} fill={getColorByIndex(index)}>
-              <LabelList
-                dataKey={d.name}
-                position="inside"
-                fill={barTextColor ?? primaryTextColor}
-                fontWeight={'bold'}
-                className={!showValueInBar ? 'hideInScreen' : undefined}
-              />
+              {showValueInBar && (
+                <LabelList
+                  dataKey={d.name}
+                  position={labelsOnTop ? "top" : "inside"}
+                  fill={barTextColor ?? primaryTextColor}
+                  fontWeight="bold"
+                  fontSize={12}
+                  className="hideInPrint"
+                />
+              )}
 
               {customColors.length > 0 &&
                 customColors.map((_, index) => (

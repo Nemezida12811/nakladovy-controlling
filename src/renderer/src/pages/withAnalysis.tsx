@@ -34,7 +34,8 @@ export default function withAnalysis(
     );
 
     const title = routes[routeName].title;
-    const text = useAppSelector(selectors.text);
+    const textConclusion = useAppSelector(selectors.textConclusion);
+    const textEvaluation = useAppSelector(selectors.textEvaluation);
 
     return (
       <Page id={routeName.replace('/', '')}>
@@ -43,27 +44,58 @@ export default function withAnalysis(
           <Table />
           <Result />
           <Spacer height={20} hideInPrint />
-          <div className="new-page"></div>
 
-          <SectionTitle>Záver a zhodnotenie analýzy</SectionTitle>
+          <div style={{ pageBreakInside: 'avoid' }}>
+            <SectionTitle>Záver</SectionTitle>
 
-          <TextArea
-            selectors={selectors}
-            actions={actions}
-            className="hideInPrint"
-          />
+            <TextArea
+              selectors={selectors}
+              actions={actions}
+              textSelector={selectors.textConclusion}
+              actionCreator={(value) => actions.changeTextConclusion(value)}
+              className="hideInPrint"
+              placeholder="Sem napíšte záver analýzy..."
+            />
 
-          <Paper>
-            <Typography
-              sx={{
-                whiteSpace: 'pre-line',
-                p: 2,
-              }}
-              className="hideInScreen"
-            >
-              {text}
-            </Typography>
-          </Paper>
+            <Paper>
+              <Typography
+                sx={{
+                  whiteSpace: 'pre-line',
+                  p: 2,
+                }}
+                className="hideInScreen"
+              >
+                {textConclusion}
+              </Typography>
+            </Paper>
+          </div>
+
+          <Spacer height={20} hideInPrint />
+
+          <div className="page-break">
+            <SectionTitle>Zhodnotenie analýzy</SectionTitle>
+
+            <TextArea
+              selectors={selectors}
+              actions={actions}
+              textSelector={selectors.textEvaluation}
+              actionCreator={(value) => actions.changeTextEvaluation(value)}
+              className="hideInPrint"
+              placeholder="Sem napíšte zhodnotenie analýzy..."
+            />
+
+            <Paper>
+              <Typography
+                sx={{
+                  whiteSpace: 'pre-line',
+                  p: 2,
+                }}
+                className="hideInScreen"
+              >
+                {textEvaluation}
+              </Typography>
+            </Paper>
+          </div>
         </PageContent>
       </Page>
     );

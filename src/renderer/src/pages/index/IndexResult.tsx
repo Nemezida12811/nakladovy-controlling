@@ -75,7 +75,7 @@ export default function IndexResult() {
   return (
     <>
       <Spacer height={40} hideInPrint />
-      <SectionTitle className="new-page">Analýza ukazovateľov</SectionTitle>
+      <SectionTitle>Analýza ukazovateľov</SectionTitle>
 
       <div>
         {items.filter(Boolean).map((item, index) => (
@@ -86,6 +86,7 @@ export default function IndexResult() {
                 '&:not(:last-child)': {
                   marginBottom: '40px',
                 },
+                pageBreakInside: 'avoid',
               }}
             >
               <Typography
@@ -135,13 +136,14 @@ export default function IndexResult() {
                   retazovyIndexNakladov[index],
                   absolutnaDiferenciaNakladov[index],
                 ]}
+                newPageAfter={false}
               />
             </Paper>
           </>
         ))}
       </div>
 
-      <Spacer height={40} />
+      <Spacer height={80} />
 
       <Paper>
         <TableStatic
@@ -149,19 +151,20 @@ export default function IndexResult() {
           header={headers.slice(1).map((h) => h.label)}
           inputs={[
             [
-              '(N<sub>c</sub>) - náklady celkom (€)',
-              `\\(N_{c}\\) = \\(\\sum N\\)`,
-            ],
-            [
               '(V<sub>c</sub>) - výnosy celkom (€)',
               `\\(V_{c}\\) = \\(\\sum V\\)`,
             ],
+            [
+              '(N<sub>c</sub>) - náklady celkom (€)',
+              `\\(N_{c}\\) = \\(\\sum N\\)`,
+            ],
           ]}
-          data={[costSumsForYears, incomeSumsForYears]}
+          data={[incomeSumsForYears,costSumsForYears]}
+          newPageAfter={false}
         />
       </Paper>
 
-      <Spacer height={40} />
+      <Spacer height={20} />
 
       <Paper>
         <TableStatic
@@ -196,10 +199,10 @@ export default function IndexResult() {
                   handleSelectChange(index, e.target.value as string)
                 }
                 options={[
-                  'proporcionálny',
-                  'degresívny',
-                  'progresívny',
-                  'regresívny',
+                  'proporcionálny (Kr=1)',
+                  'degresívny (0<Kr<1)',
+                  'progresívny (Kr>1)',
+                  'regresívny (Kr< 0)',
                 ]}
               />
             )),

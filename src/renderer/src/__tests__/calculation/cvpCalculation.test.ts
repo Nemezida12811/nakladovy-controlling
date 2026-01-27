@@ -7,11 +7,8 @@ describe('cvpCalculation', () => {
     ['10', 'kg', '3', '2'],
   ];
 
-  const fixCosts = 25;
-  const minProfit = 5;
-
   beforeAll(() => {
-    result = cvpCalculation(data, fixCosts, minProfit);
+    result = cvpCalculation(data);
   });
 
   it('should calculate correct volumes', () => {

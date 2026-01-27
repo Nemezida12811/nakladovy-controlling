@@ -9,6 +9,7 @@ export interface CVPState extends DefaultState {
 }
 
 const initialCVPState: CVPState = {
+  textConclusion: '', textEvaluation: '',
   id: 4,
   title: 'CVP analýza',
   corner: 'Ekonomické veličiny (€)',
@@ -19,11 +20,11 @@ const initialCVPState: CVPState = {
       label: 'Výrobok A',
     },
   ],
-  data: [[0], [''], [0], [0]],
+  data: [[0], [''], [0], [0], [0], [0]],
   values: [
     {
       id: '1',
-      value: '(Q) - objem produkcie - výrobná kapacita (množstvo)',
+      value: '(Q) - objem produkcie',
     },
     {
       id: '2',
@@ -38,19 +39,27 @@ const initialCVPState: CVPState = {
       value: '(Nvj) - variabilné náklady jednotkové (€)',
     },
     {
+      id: '5',
+      value: '(Nf) - fixné náklady (€)',
+    },
+    {
       id: '6',
-      value: '(Z<sub>min</sub>) minimálny zisk (€)',
+      value: '(Z<sub>min</sub>) – zisk minimálny (€)',
     },
   ],
   items: [
-    '(Q) - objem produkcie - výrobná kapacita (množstvo)',
+    '(Q) - objem produkcie',
     'merna jednotka produkcie',
     '(Pc) - predajná cena jednotková (€)',
     '(Nvj) - variabilné náklady jednotkové (€)',
+    '(Nf) - fixné náklady (€)',
+    '(Z<sub>min</sub>) – zisk minimálny (€)',
   ],
   rowTypes: [
     CellType.NUMBER,
     CellType.STRING,
+    CellType.NUMBER,
+    CellType.NUMBER,
     CellType.NUMBER,
     CellType.NUMBER,
   ],
@@ -61,7 +70,7 @@ const initialCVPState: CVPState = {
   fixTotal: 0,
   minProfit: 0,
   dynRows: false,
-  dynCols: true,
+  dynCols: true
 };
 
 const CVPSlice = createSlice({
@@ -131,6 +140,14 @@ export const selectors: RootSelectors = {
     (dynCols) => dynCols,
   ),
   text: createSelector([(state: RootState) => state.cvp.text], (text) => text),
+  textConclusion: createSelector(
+    [(state: RootState) => state.cvp.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.cvp.textEvaluation],
+    (text) => text,
+  ),
   items: createSelector(
     [(state: RootState) => state.cvp.items],
     (items) => items,

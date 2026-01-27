@@ -60,6 +60,30 @@ const items: AnalysisItem[] = [
     description:
       'Stanovenie daňovej povinnosti na základe analýzy daňovo uznaných  a neuznaných nákladov.',
   },
+  {
+    to: RouteName.PROFITABILITY_ANALYSIS,
+    title: 'Finančná analýza rentability',
+    description:
+      'Stanovenie finančných ukazovateľov o úspešnosti podnikateľskej činnosti v zmysle dosahovania zisku a zveľaďovania majetku.',
+  },
+  {
+    to: RouteName.ACTIVITY_ANALYSIS,
+    title: 'Finančná analýza aktivity',
+    description:
+      'Hodnotenie schopnosti podniku nakladať a hospodáriť s aktívami, majetkom podniku a jeho efektívnom využívaní. ',
+  },
+  {
+    to: RouteName.DEBTS_ANALYSIS,
+    title: 'Finančná analýza zadlženosti',
+    description:
+      'Hodnotenie použitia cudzieho kapitálu na aktivity podnikateľského subjektu a ich financovanie',
+  },
+  {
+    to: RouteName.LIQUIDITY_ANALYSIS,
+    title: 'Finančná analýza likvidity',
+    description:
+      'Hodnotenie použitia cudzieho kapitálu na aktivity podnikateľského subjektu a ich financovanie',
+  },
 ];
 
 export default function TaskSelection() {

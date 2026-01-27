@@ -9,6 +9,7 @@ import {
 import isEqual from 'lodash.isequal';
 
 const initialSortimentState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 5,
   title: 'Sortimentná analýza',
   corner: 'Ekonomická veličina / Produkt',
@@ -19,16 +20,23 @@ const initialSortimentState: DefaultState = {
       label: 'Výrobok A',
     },
   ],
-  data: [[0], [0], [0], [''], [0], ['']],
+  data: [ [0], [''], [0], [0], [0],],
   items: [
+    '(Q) - objem výroby',
+    'merná jednotka (množstvo)',
     '(N<sub>p</sub>) - priame náklady (€)',
     '(ÚVNV) -  úplné vlastné náklady výkonu (€)',
-    '(P<sub>cj</sub>) - predajná cena (jednotková) (€)',
-    'jednotka množstva predajnej ceny',
-    '(Q) - objem výroby',
-    'množstvo objemu výroby',
+    '(P<sub>cj</sub>) - predajná cena (jednotková) (€)'
   ],
   values: [
+    {
+      id: '7',
+      value: '(Q) - objem výroby (množstvo)',
+    },
+    {
+      id: '6',
+      value: 'jednotka množstva predajnej ceny',
+    },
     {
       id: '1',
       value: '(N<sub>p</sub>) - priame náklady (€)',
@@ -42,23 +50,15 @@ const initialSortimentState: DefaultState = {
       value: '(P<sub>cj</sub>) - predajná cena (jednotková) (€)',
     },
     {
-      id: '6',
-      value: 'jednotka množstva predajnej ceny',
-    },
-    {
-      id: '7',
-      value: '(Q) - objem výroby (množstvo)',
-    },
-    {
       id: '8',
       value: 'množstvo objemu výroby',
     },
   ],
   rowTypes: [
     CellType.NUMBER,
-    CellType.NUMBER,
-    CellType.NUMBER,
     CellType.STRING,
+    CellType.NUMBER,
+    CellType.NUMBER,
     CellType.NUMBER,
     CellType.STRING,
   ],
@@ -66,7 +66,7 @@ const initialSortimentState: DefaultState = {
   accounts: [''],
   sortable: false,
   hasAnalytic: false,
-  dynCols: true,
+  dynCols: true
 };
 
 const sortimentSlice = createSlice({
@@ -130,8 +130,12 @@ export const selectors: RootSelectors = {
     [(state: RootState) => state.sortiment.dynCols],
     (dynCols) => dynCols,
   ),
-  text: createSelector(
-    [(state: RootState) => state.sortiment.text],
+  textConclusion: createSelector(
+    [(state: RootState) => state.sortiment.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.sortiment.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

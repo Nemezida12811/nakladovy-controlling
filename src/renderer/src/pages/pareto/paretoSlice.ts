@@ -9,6 +9,7 @@ import { RootSelectors, RootState } from '../../store/store';
 import isEqual from 'lodash.isequal';
 
 const initialParetoState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 6,
   title: 'Pareto analýza nákladov',
   corner: 'Druhové náklady / Príčiny vzniku nákladov',
@@ -33,7 +34,7 @@ const initialParetoState: DefaultState = {
   sortable: false,
   hasAnalytic: false,
   dynRows: true,
-  newRowType: CellType.NUMBER,
+  newRowType: CellType.NUMBER
 };
 
 export const paretoSlice = createSlice({
@@ -97,8 +98,12 @@ export const selectors: RootSelectors = {
     [(state: RootState) => state.pareto.dynCols],
     (dynCols) => dynCols,
   ),
-  text: createSelector(
-    [(state: RootState) => state.pareto.text],
+  textConclusion: createSelector(
+    [(state: RootState) => state.pareto.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.pareto.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

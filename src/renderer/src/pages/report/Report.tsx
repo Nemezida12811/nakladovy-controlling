@@ -21,6 +21,10 @@ import { hasParetoChanged } from '../pareto/paretoSlice';
 import { hasTrendChanged } from '../trend/trendSlice';
 import { hasVariationChanged } from '../variation/variationSlice';
 import { hasTaxChanged } from '../tax/taxSlice';
+import { hasProfitabilityChanged } from '../profitability/profitabilitySlice';
+import { hasActivityChanged } from '../activity/activitySlice';
+import { hasDebtsChanged } from '../debts/debtsSlice';
+import { hasLiquidityChanged } from '../liquidity/liquiditySlice';
 
 const Wrapper = styled(Box)`
   position: relative;
@@ -84,19 +88,27 @@ type Props = {
   TrendAnalysisPage: () => React.ReactElement;
   VariationAnalysisPage: () => React.ReactElement;
   TaxAnalysisPage: () => React.ReactElement;
+  ProfitabilityAnalysisPage: () => React.ReactElement;
+  ActivityAnalysisPage: () => React.ReactElement;
+  DebtsAnalysisPage: () => React.ReactElement;
+  LiquidityAnalysisPage: () => React.ReactElement;
 };
 
 const Report: React.FC<Props> = ({
-  EconomicAnalysisPage,
-  StructureAnalysisPage,
-  IndexAnalysisPage,
-  CVPAnalysisPage,
-  SortimentAnalysisPage,
-  ParetoAnalysisPage,
-  TrendAnalysisPage,
-  VariationAnalysisPage,
-  TaxAnalysisPage,
-}) => {
+                                   EconomicAnalysisPage,
+                                   StructureAnalysisPage,
+                                   IndexAnalysisPage,
+                                   CVPAnalysisPage,
+                                   SortimentAnalysisPage,
+                                   ParetoAnalysisPage,
+                                   TrendAnalysisPage,
+                                   VariationAnalysisPage,
+                                   TaxAnalysisPage,
+                                   ProfitabilityAnalysisPage,
+                                   ActivityAnalysisPage,
+                                   DebtsAnalysisPage,
+                                   LiquidityAnalysisPage,
+                                 }) => {
   const { setMode, mode } = useTheme();
 
   const economicRef = React.useRef(null);
@@ -108,6 +120,10 @@ const Report: React.FC<Props> = ({
   const trendRef = React.useRef(null);
   const variationRef = React.useRef(null);
   const taxRef = React.useRef(null);
+  const profitabilityRef = React.useRef(null);
+  const activityRef = React.useRef(null);
+  const debtsRef = React.useRef(null);
+  const liquidityRef = React.useRef(null);
 
   const hasEconomicChange = useAppSelector(hasEconomicChanged);
   const hasStructureChange = useAppSelector(hasStructureChanged);
@@ -118,6 +134,10 @@ const Report: React.FC<Props> = ({
   const hasTrendChange = useAppSelector(hasTrendChanged);
   const hasVariationChange = useAppSelector(hasVariationChanged);
   const hasTaxChange = useAppSelector(hasTaxChanged);
+  const hasProfitabilityChange = useAppSelector(hasProfitabilityChanged);
+  const hasActivityChange = useAppSelector(hasActivityChanged);
+  const hasDebtsChange = useAppSelector(hasDebtsChanged);
+  const hasLiquidityChange = useAppSelector(hasLiquidityChanged);
 
   const hasAnyAnalysisChange =
     !hasEconomicChange &&
@@ -128,7 +148,11 @@ const Report: React.FC<Props> = ({
     !hasParetoChange &&
     !hasTrendChange &&
     !hasVariationChange &&
-    !hasTaxChange;
+    !hasTaxChange &&
+    !hasProfitabilityChange;
+    !hasActivityChange;
+    !hasDebtsChange;
+    !hasProfitabilityChange;
 
   const prevMode = useRef<ColorMode>();
 
@@ -208,6 +232,30 @@ const Report: React.FC<Props> = ({
         </div>
       )}
 
+      {hasProfitabilityChange && (
+        <div className="new-page" ref={profitabilityRef}>
+          <ProfitabilityAnalysisPage />
+        </div>
+      )}
+
+      {hasActivityChange && (
+        <div className="new-page" ref={activityRef}>
+          <ActivityAnalysisPage />
+        </div>
+      )}
+
+      {hasDebtsChange && (
+        <div className="new-page" ref={debtsRef}>
+          <DebtsAnalysisPage />
+        </div>
+      )}
+
+      {hasLiquidityChange && (
+        <div className="new-page" ref={liquidityRef}>
+          <LiquidityAnalysisPage />
+        </div>
+      )}
+
       {hasAnyAnalysisChange && (
         <Center>
           <Text>Žiadna analýza nebola zatiaľ zmenená</Text>
@@ -226,84 +274,120 @@ const Report: React.FC<Props> = ({
           items={[
             ...(hasEconomicChange
               ? [
-                  {
-                    label: 'Ekonomická analýza hospodárenia',
-                    id: RouteName.ECONOMIC_ANALYSIS,
-                    ref: economicRef,
-                  },
-                ]
+                {
+                  label: 'Ekonomická analýza hospodárenia',
+                  id: RouteName.ECONOMIC_ANALYSIS,
+                  ref: economicRef,
+                },
+              ]
               : []),
             ...(hasStructureChange
               ? [
-                  {
-                    label: 'Štruktúrna analýza nákladov',
-                    id: RouteName.STRUCTURE_ANALYSIS,
-                    ref: structureRef,
-                  },
-                ]
+                {
+                  label: 'Štruktúrna analýza nákladov',
+                  id: RouteName.STRUCTURE_ANALYSIS,
+                  ref: structureRef,
+                },
+              ]
               : []),
             ...(hasIndexChange
               ? [
-                  {
-                    label: 'Indexná analýza nákladov',
-                    id: RouteName.INDEX_ANALYSIS,
-                    ref: indexRef,
-                  },
-                ]
+                {
+                  label: 'Indexná analýza nákladov',
+                  id: RouteName.INDEX_ANALYSIS,
+                  ref: indexRef,
+                },
+              ]
               : []),
             ...(hasCvpChange
               ? [
-                  {
-                    label: 'CVP analýza',
-                    id: RouteName.CVP_ANALYSIS,
-                    ref: cvpRef,
-                  },
-                ]
+                {
+                  label: 'CVP analýza',
+                  id: RouteName.CVP_ANALYSIS,
+                  ref: cvpRef,
+                },
+              ]
               : []),
             ...(hasSortimentChange
               ? [
-                  {
-                    label: 'Sortimentná analýza',
-                    id: RouteName.SORTIMENT_ANALYSIS,
-                    ref: sortimentRef,
-                  },
-                ]
+                {
+                  label: 'Sortimentná analýza',
+                  id: RouteName.SORTIMENT_ANALYSIS,
+                  ref: sortimentRef,
+                },
+              ]
               : []),
             ...(hasParetoChange
               ? [
-                  {
-                    label: 'Pareto analýza nákladov',
-                    id: RouteName.PERETO_ANALYSIS,
-                    ref: paretoRef,
-                  },
-                ]
+                {
+                  label: 'Pareto analýza nákladov',
+                  id: RouteName.PERETO_ANALYSIS,
+                  ref: paretoRef,
+                },
+              ]
               : []),
             ...(hasTrendChange
               ? [
-                  {
-                    label: 'Trendová analýza nákladov',
-                    id: RouteName.TREND_ANALYSIS,
-                    ref: trendRef,
-                  },
-                ]
+                {
+                  label: 'Trendová analýza nákladov',
+                  id: RouteName.TREND_ANALYSIS,
+                  ref: trendRef,
+                },
+              ]
               : []),
             ...(hasVariationChange
               ? [
-                  {
-                    label: 'Odchýlková analýza nákladov',
-                    id: RouteName.VARIATION_ANALYSIS,
-                    ref: variationRef,
-                  },
-                ]
+                {
+                  label: 'Odchýlková analýza nákladov',
+                  id: RouteName.VARIATION_ANALYSIS,
+                  ref: variationRef,
+                },
+              ]
               : []),
             ...(hasTaxChange
               ? [
-                  {
-                    label: 'Daňová analýza nákladov',
-                    id: RouteName.TAX_ANALYSIS,
-                    ref: taxRef,
-                  },
-                ]
+                {
+                  label: 'Daňová analýza nákladov',
+                  id: RouteName.TAX_ANALYSIS,
+                  ref: taxRef,
+                },
+              ]
+              : []),
+            ...(hasProfitabilityChange
+              ? [
+                {
+                  label: 'Analýza rentability',
+                  id: RouteName.PROFITABILITY_ANALYSIS,
+                  ref: profitabilityRef,
+                },
+              ]
+              : []),
+            ...(hasActivityChange
+              ? [
+                {
+                  label: 'Analýza rentability',
+                  id: RouteName.ACTIVITY_ANALYSIS,
+                  ref: activityRef,
+                },
+              ]
+              : []),
+            ...(hasActivityChange
+              ? [
+                {
+                  label: 'Analýza rentability',
+                  id: RouteName.DEBTS_ANALYSIS,
+                  ref: debtsRef,
+                },
+              ]
+              : []),
+            ...(hasDebtsChange
+              ? [
+                {
+                  label: 'Analýza rentability',
+                  id: RouteName.PROFITABILITY_ANALYSIS,
+                  ref: profitabilityRef,
+                },
+              ]
               : []),
           ]}
         />
@@ -328,7 +412,7 @@ const TimelineComponent: React.FC<{
   return (
     <Timeline>
       {items.map((item, index) => (
-        <TimelineItem>
+        <TimelineItem key={item.id}>
           <TimelineSeparator>
             <TimelineDot />
             {index < items.length - 1 && <TimelineConnector />}

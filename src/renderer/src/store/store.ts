@@ -11,6 +11,10 @@ import { CellValue, Header, ItemSelectOption, Value } from './rootReducer';
 import { trendReducer } from '@renderer/pages/trend/trendSlice';
 import { variationReducer } from '@renderer/pages/variation/variationSlice';
 import { taxReducer } from '@renderer/pages/tax/taxSlice';
+import { profitabilityReducer } from '../pages/profitability/profitabilitySlice';
+import { activityReducer } from '@renderer/pages/activity/activitySlice';
+import { debtsReducer } from '@renderer/pages/debts/debtsSlice';
+import { liquidityReducer } from '@renderer/pages/liquidity/liquiditySlice';
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +29,10 @@ export const store = configureStore({
     tax: taxReducer,
     evaluation: evaluationReducer,
     project: projectReducer,
+    profitability: profitabilityReducer,
+    activity: activityReducer,
+    debts: debtsReducer,
+    liquidity: liquidityReducer,
   },
 });
 
@@ -44,7 +52,8 @@ export type RootSelectors = {
   ) => (state: RootState) => CellValue;
   dynRows: (state: RootState) => boolean | undefined;
   dynCols: (state: RootState) => boolean | undefined;
-  text: (state: RootState) => string;
+  textConclusion: (state: RootState) => string;
+  textEvaluation: (state: RootState) => string;
   items: (state: RootState) => string[];
   corner: (state: RootState) => string;
   values: (state: RootState) => Value[];

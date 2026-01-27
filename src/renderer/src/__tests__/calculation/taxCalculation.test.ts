@@ -9,7 +9,7 @@ describe('economicCalculation', () => {
   ];
 
   beforeAll(() => {
-    result = taxCalculation(data, 23, 100);
+    result = taxCalculation(data, 23);
   });
 
   it('should calculate correct uznaneNakladySum', () => {

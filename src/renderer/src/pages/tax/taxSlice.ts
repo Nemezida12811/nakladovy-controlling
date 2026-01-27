@@ -30,11 +30,16 @@ const initialTaxState: DefaultState = {
       type: CellType.STRING,
       label: 'Ďaňovo neuznané náklady (€)',
     },
+    {
+      id: '3',
+      type: CellType.STRING,
+      label: 'Výnosy (€)',
+    },
   ],
   data: [
-    [0, 0],
-    [0, 0],
-    [0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
   ],
   items: [costOptions[0].label, profitOptions[0].label, ''],
   values: [
@@ -53,6 +58,8 @@ const initialTaxState: DefaultState = {
   ],
   rowTypes: [CellType.NUMBER, CellType.NUMBER, CellType.NUMBER],
   text: '',
+  textConclusion: '',
+  textEvaluation: '',
   accounts: [''],
   sortable: true,
   hasAnalytic: true,
@@ -73,6 +80,8 @@ export const taxSlice = createSlice({
       state.items = initialTaxState.items;
       state.values = initialTaxState.values;
       state.text = initialTaxState.text;
+      state.textConclusion = initialTaxState.textConclusion;
+      state.textEvaluation = initialTaxState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,
@@ -123,6 +132,14 @@ export const selectors: RootSelectors = {
     (dynCols) => dynCols,
   ),
   text: createSelector([(state: RootState) => state.tax.text], (text) => text),
+  textConclusion: createSelector(
+    [(state: RootState) => state.tax.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.tax.textEvaluation],
+    (text) => text,
+  ),
   items: createSelector(
     [(state: RootState) => state.tax.items],
     (items) => items,

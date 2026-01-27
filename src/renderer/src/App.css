@@ -454,6 +454,14 @@ a {
   break-after: always;
 }
 
+@media print {
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+        display: block !important;
+    }
+}
+
 .hideInScreen {
   display: none !important;
   visibility: hidden !important;

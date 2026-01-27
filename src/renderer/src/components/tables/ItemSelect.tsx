@@ -129,10 +129,6 @@ const Row: React.FC<RowProps> = React.memo(({ selectors, actions, index }) => {
             options={itemSelectOptions}
             groupBy={(option) => option.type}
             getOptionLabel={(option) => option.label}
-            getOptionDisabled={(option) =>
-              items.includes(option.label) &&
-              option.label !== ADD_CUSTOM_ITEM_LABEL
-            }
             renderInput={(params) => <TextField {...params} />}
             clearIcon={null}
             onChange={(_, value) => {

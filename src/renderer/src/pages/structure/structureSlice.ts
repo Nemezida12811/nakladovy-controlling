@@ -11,6 +11,7 @@ import { costOptions } from '@renderer/chartOfAccounts';
 import isEqual from 'lodash.isequal';
 
 const initialStructureState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 2,
   title: 'Štruktúrna analýza nákladov',
   corner: 'Druhové náklady | Kalkulačné náklady →',
@@ -41,7 +42,7 @@ const initialStructureState: DefaultState = {
   dynRows: true,
   dynCols: true,
   itemSelectOptions: costOptions,
-  newRowType: CellType.NUMBER,
+  newRowType: CellType.NUMBER
 };
 
 const structureSlice = createSlice({
@@ -108,6 +109,14 @@ export const selectors: RootSelectors = {
   ),
   text: createSelector(
     [(state: RootState) => state.structure.text],
+    (text) => text,
+  ),
+  textConclusion: createSelector(
+    [(state: RootState) => state.structure.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.structure.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

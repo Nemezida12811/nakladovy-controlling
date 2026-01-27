@@ -34,7 +34,7 @@ export function indexCalculation(
 
   const betweenYears: string[] = [];
   for (let i = 0; i < headers.length - 2; i++) {
-    betweenYears[i] = headers[i + 1] + '/' + headers[i + 2];
+    betweenYears[i] = headers[i + 2] + '/' + headers[i + 1];
   }
 
   const bazickyIndex = data.reduce((acc, row) => {

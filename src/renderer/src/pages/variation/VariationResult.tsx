@@ -1,31 +1,22 @@
-import { Box, Paper, styled, TextField } from '@mui/material';
+import { Paper } from '@mui/material';
 import SectionTitle from '@renderer/components/SectionTitle';
-import { variationActions, selectors } from './variationSlice';
+import { selectors, variationActions } from './variationSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Spacer from '@renderer/components/Spacer';
 import TableStatic from '@renderer/components/TableStatic';
 import { variationCalculation } from './variationCalculation';
 import BarGraph from '@renderer/components/graph/BarGraph';
 import { transposeMatrix } from '@renderer/helper';
-
-const InputWrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-`;
-
-const YearLabel = styled(SectionTitle)`
-  margin-bottom: 0;
-`;
+import TableSelect from '@renderer/components/tables/TableSelect';
+import { useEffect } from 'react';
 
 const VariationResults = () => {
-  const dispatch = useAppDispatch();
 
   const items = useAppSelector(selectors.items);
   const data = useAppSelector(selectors.data);
+  const dispatch = useAppDispatch();
 
-  const { absolutnaDiferencia, plneniePlanu } = variationCalculation(
+  const { absolutnaDiferencia, plneniePlanu, percentualnaOdchylka} = variationCalculation(
     data as number[][],
   );
 
@@ -33,38 +24,72 @@ const VariationResults = () => {
 
   // @ts-ignore
   const additionalData = useAppSelector(selectors.getAdditionalData!) as any;
+  const selectValues = additionalData?.selectValues || [];
+  const selectValuesType = additionalData?.selectValuesType || [];
 
-  const year = additionalData?.year ?? '';
+  const handleSelectChange = (index: number, value: string) => {
+    const newValues = [...selectValues];
+    newValues[index] = value;
 
-  const handleTextChange = (value: string) => {
     dispatch(
       variationActions.setAdditionalData({
-        key: 'year',
-        value,
+        key: 'selectValues',
+        value: newValues,
       }),
     );
   };
 
+  const handleSelectTypeChange = (index: number, value: string) => {
+    const newValues = [...selectValuesType];
+    newValues[index] = value;
+
+    dispatch(
+      variationActions.setAdditionalData({
+        key: 'selectValuesType',
+        value: newValues,
+      }),
+    );
+  };
+
+  useEffect(() => {
+    if (selectValues.length < items.length) {
+      dispatch(
+        variationActions.setAdditionalData({
+          key: 'selectValues',
+          value: [...selectValues, ...Array(items.length - selectValues.length).fill('')],
+        }),
+      );
+    } else if (selectValues.length > items.length) {
+      dispatch(
+        variationActions.setAdditionalData({
+          key: 'selectValues',
+          value: selectValues.slice(0, items.length),
+        }),
+      );
+    }
+  }, [items.length]);
+
+  useEffect(() => {
+    if (selectValuesType.length < items.length) {
+      dispatch(
+        variationActions.setAdditionalData({
+          key: 'selectValuesType',
+          value: [...selectValuesType, ...Array(items.length - selectValuesType.length).fill('')],
+        }),
+      );
+    } else if (selectValuesType.length > items.length) {
+      dispatch(
+        variationActions.setAdditionalData({
+          key: 'selectValuesType',
+          value: selectValuesType.slice(0, items.length),
+        }),
+      );
+    }
+  }, [items.length]);
+
   return (
     <div>
       <Spacer height={40} />
-
-      <InputWrapper>
-        <YearLabel>Sledovaný rok</YearLabel>
-        <TextField
-          sx={{
-            background: (theme) => theme.palette.background.paper,
-          }}
-          inputProps={{
-            style: {
-              textAlign: 'center',
-            },
-          }}
-          onChange={(e) => handleTextChange(e.target.value)}
-          value={year}
-          type="number"
-        />
-      </InputWrapper>
 
       <Spacer height={40} />
 
@@ -75,13 +100,49 @@ const VariationResults = () => {
           corner={'Ekonomické ukazovatele'}
           header={items}
           inputs={[
-            ['(AD) - absolútna diferencia (€)', `\\(AD = skutočnosť - plán\\)`],
+            ['(O) odchýlka (€) ', `\\(O = skutočnosť - plán\\)`],
             [
-              '(I<sub>p</sub>) plnenia plánu (%)',
+              '(I<sub>p</sub>) percentuálne plnenie plánu (%)',
               `\\(I_{p}=\\frac{skutočnosť}{plán} * 100\\% \\)`,
             ],
+            ['(O) percentuálna odchýlka plnenia plánu (%)', `\\(O = skutočnosť - plán\\)`],
           ]}
-          data={[absolutnaDiferencia, plneniePlanu]}
+          data={[absolutnaDiferencia, plneniePlanu, percentualnaOdchylka]}
+          footers={[
+            {
+              label: 'charakter odchýlky',
+              items: selectValues.map((value, index) => (
+                <TableSelect
+                  key={index}
+                  value={value}
+                  onChange={(e) =>
+                    handleSelectChange(index, e.target.value as string)
+                  }
+                  options={[
+                    'pozitívna odchýlka',
+                    'negatívna odchýlka',
+                  ]}
+                />
+              )),
+            },
+            {
+              label: 'plnenie plánu',
+              items: selectValuesType.map((value, index) => (
+                <TableSelect
+                  key={index}
+                  value={value}
+                  onChange={(e) =>
+                    handleSelectTypeChange(index, e.target.value as string)
+                  }
+                  options={[
+                    'prekročenie plánu',
+                    'neplnenie plánu',
+                    'plnenie plánu na 100%',
+                  ]}
+                />
+              )),
+            },
+          ]}
         />
       </Paper>
 
@@ -112,15 +173,16 @@ const VariationResults = () => {
         labels={items.filter(Boolean)}
         data={[
           {
-            name: 'plnenie plánu',
+            name: 'percentuálne plnenie plánu',
             values: plneniePlanu,
           },
+          {
+            name: 'percentuálna odchýlka plnenia plánu',
+            values: percentualnaOdchylka,
+          },
         ]}
-        yAxisLabel="percento plnenia plánu (%)"
-        showLegend={false}
-        customColors={plneniePlanu.map((value) =>
-          value >= 100 ? '#2b56ff' : '#fa0505',
-        )}
+        yAxisLabel="percento (%)"
+        showLegend={true}
         showTooltip={false}
       />
     </div>

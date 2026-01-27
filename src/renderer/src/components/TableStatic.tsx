@@ -26,16 +26,21 @@ type Props = {
     label: string;
     items: React.ReactNode[];
   };
+  footers?: {
+    label: string;
+    items: React.ReactNode[];
+  }[];
 };
 
 const TableStatic: React.FC<Props> = ({
-  data,
-  header,
-  corner,
-  inputs,
-  newPageAfter = true,
-  footer,
-}) => {
+                                        data,
+                                        header,
+                                        corner,
+                                        inputs,
+                                        newPageAfter = true,
+                                        footer,
+                                        footers,
+                                      }) => {
   let separatedData: number[][][] = [];
   let separatedHeaders: string[][] = [];
   const colsInTable = 6;
@@ -58,6 +63,8 @@ const TableStatic: React.FC<Props> = ({
     }
     separatedHeaders[table].push(header[y]);
   }
+
+  const footerRows = footers || (footer ? [footer] : []);
 
   return (
     <>
@@ -106,13 +113,13 @@ const TableStatic: React.FC<Props> = ({
               );
             })}
 
-            {footer && (
-              <TableRow>
+            {footerRows.map((footerRow, footerIndex) => (
+              <TableRow key={`footer-${footerIndex}`}>
                 <TableCell sx={{ textAlign: 'left', padding: '0 9px' }}>
-                  {footer.label}
+                  {footerRow.label}
                 </TableCell>
 
-                {footer.items.map((item, index) => (
+                {footerRow.items.map((item, index) => (
                   <TableCell
                     sx={{
                       textAlign: 'center',
@@ -124,7 +131,7 @@ const TableStatic: React.FC<Props> = ({
                   </TableCell>
                 ))}
               </TableRow>
-            )}
+            ))}
           </TableBody>
         </TableStyled>
       </TableData>

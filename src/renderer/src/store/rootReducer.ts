@@ -49,6 +49,8 @@ export interface DefaultState {
   items: string[];
   values: Value[];
   text: string;
+  textConclusion: string;
+  textEvaluation: string;
   accounts: string[];
   sortable: boolean;
   hasAnalytic: boolean;
@@ -158,6 +160,12 @@ export const rootReducer = {
   changeText: (state: DefaultState, action: PayloadAction<string>) => {
     state.text = action.payload;
   },
+  changeTextConclusion: (state: DefaultState, action: PayloadAction<string>) => {
+    state.textConclusion = action.payload;
+  },
+  changeTextEvaluation: (state: DefaultState, action: PayloadAction<string>) => {
+    state.textEvaluation = action.payload;
+  },
   setAdditionalData: (
     state: DefaultState,
     action: PayloadAction<{
@@ -185,6 +193,8 @@ export const openProject = {
     state.items = action.payload.items;
     state.values = action.payload.values;
     state.text = action.payload.text;
+    state.textConclusion = action.payload.textConclusion; // ✅ додайте
+    state.textEvaluation = action.payload.textEvaluation; // ✅ додайте
     state.additionalData = action.payload.additionalData;
   },
 };

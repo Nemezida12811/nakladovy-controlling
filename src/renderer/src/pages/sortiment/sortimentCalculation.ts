@@ -2,17 +2,17 @@ import { formatNumber } from '@renderer/utils/formatNumber';
 import { divideArrays, subtractArrays, multiplyArrays } from '../../helper';
 
 export function sortimentCalculation(data: number[][]) {
+  // objem výroby
+  const volume = data[0].map(formatNumber);
+
   // priame náklady
-  const totalDirectCosts = data[0].map(formatNumber);
+  const totalDirectCosts = data[2].map(formatNumber);
 
   // úplné vlastné náklady výkonu
-  const totalCost = data[1].map(formatNumber);
+  const totalCost = data[3].map(formatNumber);
 
   // predajna cena
-  const price = data[2].map(formatNumber);
-
-  // objem výroby
-  const volume = data[4].map(formatNumber);
+  const price = data[4].map(formatNumber);
 
   const marginGross = subtractArrays(price, totalDirectCosts).map(formatNumber);
 

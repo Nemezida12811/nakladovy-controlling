@@ -28,6 +28,7 @@ export default function EconomicResult() {
     financialConstData,
     servicesConstData,
     taxesConstData,
+    hospCostData,
   } = economicCalculation(data, values, headers.length ?? 0);
 
   return (
@@ -40,8 +41,8 @@ export default function EconomicResult() {
           corner="Ekonomické veličiny"
           header={headers.map((h) => h.label)}
           inputs={[
-            ['(N<sub>c</sub>) - náklady celkom (€)', `\\(\\sum N\\)`],
             ['(V<sub>c</sub>) - výnosy celkom (€)', `\\(\\sum V\\)`],
+            ['(N<sub>c</sub>) - náklady celkom (€)', `\\(\\sum N\\)`],
           ]}
           data={[costData, incomeData]}
         />
@@ -53,10 +54,10 @@ export default function EconomicResult() {
           header={headers.map((h) => h.label)}
           inputs={[
             [
-              '(VH) - výsledok hospodárenia (€)',
+              '(VH) - výsledok hospodárenia (€) (zisk, strata)',
               `\\(\\begin{align*}
-              \\text{ZISK} & \\quad V > N \\\\
-              \\text{STRATA} & \\quad V < N
+              \\text{(ZISK)} & \\quad V > N \\\\
+              \\text{(STRATA)} & \\quad V < N
               \\end{align*}\\)`,
             ],
             [
@@ -73,32 +74,36 @@ export default function EconomicResult() {
             ],
             ['(e) - efektívnosť', `\\(e=\\frac{V}{N}\\)`],
             [
-              '(h<sub>c</sub>) - celková nákladovosť',
-              `\\(h_{c}=\\frac{N}{V}\\)`,
+              '(n<sub>c</sub>) - nákladovosť celková',
+              `\\(n_{c}=\\frac{N}{V}\\)`,
             ],
             [
-              '(h<sub>m</sub>) - materiálová nákladovosť',
-              '\\(\\frac{N_{MAT (501)}}{V}\\)',
+              '(n<sub>m</sub>) - materiálová nákladovosť',
+              '\\(\\frac{N_{MAT (501-507)}}{V}\\)',
             ],
             [
-              '(h<sub>mz</sub>) - mzdová nákladovosť',
-              '\\(\\frac{N_{MZDY (521)}}{V}\\)',
+              '(n<sub>mz</sub>) - mzdová nákladovosť',
+              '\\(\\frac{N_{MZDY (521-528)}}{V}\\)',
             ],
             [
-              '(h<sub>o</sub>) - odpisová nákladovosť',
-              '\\(\\frac{N_{odpí (551)}}{V}\\)',
+              '(n<sub>o</sub>) - odpisová nákladovosť',
+              '\\(\\frac{N_{odpí (551-557)}}{V}\\)',
             ],
             [
-              '(h<sub>f</sub>) - finančná nákladovosť',
+              '(n<sub>f</sub>) - finančná nákladovosť',
               '\\(\\frac{N_{F (561-569)}}{V}\\)',
             ],
             [
-              '(h<sub>s</sub>) - nákladovosť služieb',
+              '(n<sub>s</sub>) - nákladovosť služieb',
               '\\(\\frac{N_{s (511-518)}}{V}\\)',
             ],
             [
-              '(h<sub>d</sub>) - nákladovosť daní',
+              '(n<sub>d</sub>) - daňová nákladovosť',
               '\\(\\frac{N_{d (531-538)}}{V}\\)',
+            ],
+            [
+              '(n<sub>hč</sub>) - nákladovosť hospodárskej činnosti',
+              '\\(\\frac{N_{d (541-549)}}{V}\\)',
             ],
           ]}
           data={[
@@ -114,6 +119,7 @@ export default function EconomicResult() {
             financialConstData,
             servicesConstData,
             taxesConstData,
+            hospCostData,
           ]}
         />
       </Paper>
@@ -125,12 +131,12 @@ export default function EconomicResult() {
         labels={headers.map((h) => h.label)}
         data={[
           {
-            name: 'Náklady (N<sub>c</sub>)',
-            values: costData,
-          },
-          {
             name: 'Výnosy (V<sub>c</sub>)',
             values: incomeData,
+          },
+          {
+            name: 'Náklady (N<sub>c</sub>)',
+            values: costData,
           },
         ]}
         yAxisLabel="ekonomická veličina (€)"
@@ -178,7 +184,7 @@ export default function EconomicResult() {
             values: costEfficiencyData,
           },
           {
-            name: 'Celková nákladovosť  h<sub>c</sub>',
+            name: 'Nákladovosť celková  n<sub>c</sub>',
             values: costIndicatorData,
           },
         ]}
@@ -193,23 +199,24 @@ export default function EconomicResult() {
         labels={headers.map((h) => h.label)}
         data={[
           {
-            name: 'materiálová nákladovosť h<sub>m</sub>',
+            name: 'materiálová nákladovosť n<sub>m</sub>',
             values: materialCostData,
           },
-          { name: 'mzdová nákladovosť h<sub>mz</sub>', values: wageCostData },
+          { name: 'mzdová nákladovosť n<sub>mz</sub>', values: wageCostData },
           {
-            name: 'odpisová nákladovosť h<sub>o</sub>',
+            name: 'odpisová nákladovosť n<sub>o</sub>',
             values: depreciationCostData,
           },
           {
-            name: 'finančná nákladovosť h<sub>f</sub>',
+            name: 'finančná nákladovosť n<sub>f</sub>',
             values: financialConstData,
           },
           {
-            name: 'nákladovosť služieb h<sub>s</sub>',
+            name: 'nákladovosť služieb n<sub>s</sub>',
             values: servicesConstData,
           },
-          { name: 'nákladovosť daní h<sub>d</sub>', values: taxesConstData },
+          { name: 'daňová nákladovosť n<sub>d</sub>', values: taxesConstData },
+          { name: 'nákladovosť hospodárskej činnosti n<sub>hč</sub>', values: hospCostData },
         ]}
         showValueInBar={false}
       />
