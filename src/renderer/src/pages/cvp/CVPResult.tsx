@@ -55,7 +55,7 @@ export default function CVPResult() {
             ],
             [
               '(N<sub>0</sub>) - nulový bod (€)',
-              `\\(N_{0}=\\frac{F{n}}{1-\\frac{N_{vj}}{P_{c}}}\\)`,
+              `\\(N_{0}=\\frac{Nf}{1-\\frac{N_{vj}}{P_{c}}}\\)`,
             ],
             [
               '(N<sub>0</sub>) - nulový bod Zmin',

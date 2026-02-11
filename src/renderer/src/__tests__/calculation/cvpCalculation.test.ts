@@ -3,8 +3,8 @@ import { cvpCalculation } from '@renderer/pages/cvp/cvpCalculation';
 describe('cvpCalculation', () => {
   let result: ReturnType<typeof cvpCalculation>;
   const data = [
-    ['5', 'ks', '2', '1'],
-    ['10', 'kg', '3', '2'],
+    ['5', 'ks', '2', '1', '25', '5'],
+    ['10', 'kg', '3', '2', '25', '5'],
   ];
 
   beforeAll(() => {

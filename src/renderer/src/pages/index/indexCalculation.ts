@@ -92,7 +92,7 @@ export function indexCalculation(
   const percentoZmenyNakladov: number[] = [];
 
   if (headers.length > 2) {
-    for (let i = 1; i < headers.length - 1; i++) {
+    for (let i = 1; i < costSumsForYears.length; i++) {
       const n1 = costSumsForYears[i];
       const n0 = costSumsForYears[i - 1];
 
@@ -111,7 +111,7 @@ export function indexCalculation(
   const percentoZmenyVynosov: number[] = [];
 
   if (headers.length > 2) {
-    for (let i = 1; i < headers.length - 1; i++) {
+    for (let i = 1; i < incomeSumsForYears.length; i++) {
       const n1 = incomeSumsForYears[i];
       const n0 = incomeSumsForYears[i - 1];
 

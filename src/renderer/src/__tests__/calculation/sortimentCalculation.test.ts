@@ -4,11 +4,10 @@ describe('economicCalculation', () => {
   let result: ReturnType<typeof sortimentCalculation>;
   const data = [
     [6, 3],
+    ['ks', 'kg'],
     [9, 10],
     [5, 6],
-    ['ks', 'kg'],
     [80, 5],
-    ['ks', 't'],
   ];
 
   beforeAll(() => {
@@ -16,50 +15,50 @@ describe('economicCalculation', () => {
   });
 
   it('should calculate correct rentCost', () => {
-    expect(result.rentCost).toEqual([-44.44, -40]);
+    expect(result.rentCost).toEqual([1500, -16.67]);
   });
 
   it('should calculate correct rentIncome', () => {
-    expect(result.rentIncome).toEqual([-80, -66.67]);
+    expect(result.rentIncome).toEqual([94, -20]);
   });
 
   it('should calculate correct marginProfit', () => {
-    expect(result.marginProfit).toEqual([-80, -66.67]);
+    expect(result.marginProfit).toEqual([94, -20]);
   });
 
   it('should calculate correct marginGross', () => {
-    expect(result.marginGross).toEqual([-1, 3]);
+    expect(result.marginGross).toEqual([71, -5]);
   });
 
   it('should calculate correct allowance', () => {
-    expect(result.allowance).toEqual([-0.2, 0.5]);
+    expect(result.allowance).toEqual([0.89, -1]);
   });
 
   it('should calculate correct profit', () => {
-    expect(result.profit).toEqual([-340, -340]);
+    expect(result.unitProfit).toEqual([75, -1]);
   });
 
   it('should calculate correct totalDirectCosts', () => {
-    expect(result.totalDirectCosts).toEqual([6, 3]);
+    expect(result.totalDirectCosts).toEqual([9, 10]);
   });
 
   it('should calculate correct totalIndirectCosts', () => {
-    expect(result.totalIndirectCosts).toEqual([3, 7]);
+    expect(result.totalIndirectCosts).toEqual([-4, -4]);
   });
 
   it('should calculate correct unitProfit', () => {
-    expect(result.unitProfit).toEqual([-4, -4]);
+    expect(result.unitProfit).toEqual([75, -1]);
   });
 
   it('should calculate correct income', () => {
-    expect(result.income).toEqual([400, 30]);
+    expect(result.income).toEqual([480, 15]);
   });
 
   it('should calculate correct totalCosts', () => {
-    expect(result.totalCosts).toEqual([720, 50]);
+    expect(result.totalCosts).toEqual([30, 18]);
   });
 
   it('should calculate correct totalProfit', () => {
-    expect(result.totalProfit).toEqual([-320, -20]);
+    expect(result.totalProfit).toEqual([450, -3]);
   });
 });

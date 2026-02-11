@@ -42,12 +42,10 @@ export function cvpCalculation(
   );
 
   // nulový bod (€)
+  const ones = new Array(fix.length).fill(1);
   const zeroEur = divideArrays(
     fix,
-    subtractArrays(
-      costs.map(() => 1),
-      divideArrays(costs, prices),
-    ),
+    subtractArrays(ones, divideArrays(costs, prices))
   );
 
   // nulový bod Zmin (ks)

@@ -44,7 +44,7 @@ export default function EconomicResult() {
             ['(V<sub>c</sub>) - výnosy celkom (€)', `\\(\\sum V\\)`],
             ['(N<sub>c</sub>) - náklady celkom (€)', `\\(\\sum N\\)`],
           ]}
-          data={[costData, incomeData]}
+          data={[incomeData, costData]}
         />
       </Paper>
       <Spacer height={40} />

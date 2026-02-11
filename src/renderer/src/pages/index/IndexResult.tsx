@@ -66,7 +66,7 @@ export default function IndexResult() {
       dispatch(
         indexActions.setAdditionalData({
           key: 'selectValues',
-          value: selectValues.slice(0, selectValues.length - 1),
+          value: selectValues.slice(0, selectValues.length),
         }),
       );
     }
@@ -129,7 +129,7 @@ export default function IndexResult() {
                   ],
                   [
                     '(AD<sub>r</sub>) - absolútna diferencia (reťazová)',
-                    `\\(AD_{r} = N_{1} - N_{0}\\)`,
+                    `\\(AD_{r} = N_{i+1} - N_{i}\\)`,
                   ],
                 ]}
                 data={[
@@ -177,7 +177,7 @@ export default function IndexResult() {
             ],
             [
               '(P<sub>zv</sub>) - percento zmeny výnosov (%)',
-              `\\(P_{zn} = (\\frac{V_{i+1}}{V_{i}} \\times 100) - 100\\)`,
+              `\\(P_{zv} = (\\frac{V_{i+1}}{V_{i}} \\times 100) - 100\\)`,
             ],
             [
               '(K<sub>r</sub>) - koeficient reakcie',

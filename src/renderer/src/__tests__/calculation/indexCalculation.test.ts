@@ -67,6 +67,6 @@ describe('economicCalculation', () => {
   });
 
   it('should calculate correct betweenYears', () => {
-    expect(result.betweenYears).toEqual(['2000/2001']);
+    expect(result.betweenYears).toEqual(['2001/2000']);
   });
 });

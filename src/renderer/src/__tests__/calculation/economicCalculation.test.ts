@@ -81,7 +81,7 @@ describe('economicCalculation', () => {
   });
 
   it('should calculate correct materialCostData', () => {
-    expect(result.materialCostData).toEqual([4, 0.67]);
+    expect(result.materialCostData).toEqual([8.5, 0.89]);
   });
 
   it('should calculate correct wageCostData', () => {

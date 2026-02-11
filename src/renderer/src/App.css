@@ -455,11 +455,7 @@ a {
 }
 
 @media print {
-    .page-break {
-        page-break-before: always;
-        break-before: page;
-        display: block !important;
-    }
+
 }
 
 .hideInScreen {
@@ -495,6 +491,17 @@ textarea {
 }
 
 @media print {
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+    display: block !important;
+  }
+
+  .no-page-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
   .hideInPrint {
     display: none;
     visibility: hidden;

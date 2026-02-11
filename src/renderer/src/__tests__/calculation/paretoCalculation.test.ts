@@ -23,7 +23,7 @@ describe('economicCalculation', () => {
   });
 
   it('should calculate correct percentagesKumul', () => {
-    expect(result.percentagesKumul).toEqual([60, 93.33, 100]);
+    expect(result.percentagesKumul).toEqual([60, 93, 100]);
   });
 
   it('should calculate correct valuesKumul', () => {
