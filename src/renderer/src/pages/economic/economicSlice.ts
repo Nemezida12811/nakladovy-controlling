@@ -66,6 +66,8 @@ export const economicSlice = createSlice({
       state.items = initialEconomicState.items;
       state.values = initialEconomicState.values;
       state.text = initialEconomicState.text;
+      state.textConclusion = initialEconomicState.textConclusion;
+      state.textEvaluation = initialEconomicState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,

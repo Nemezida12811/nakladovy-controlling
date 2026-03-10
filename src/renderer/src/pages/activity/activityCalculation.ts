@@ -2,7 +2,6 @@ import { CellValue } from '@renderer/store/rootReducer';
 import { formatNumber } from '@renderer/utils/formatNumber';
 
 export function activityCalculation(data: CellValue[][]) {
-  console.log('Calculation input data:', data);
 
   const colCount = data[0]?.length ?? 0;
 
@@ -59,11 +58,6 @@ export function activityCalculation(data: CellValue[][]) {
   // Doba obratu celkových aktív
   const turnoverTotalAssets = sales.map((s, i) =>
     s !== 0 ? formatNumber(((totalAssets[i] / s) * 360).toFixed(2)) : 0
-  );
-
-  console.log('Calculation results:', {
-    turnoverTotalCapital, turnoverEquity, turnoverInventory, turnoverReceivables,
-    turnoverPayables, turnoverFixedAssets, turnoverTotalAssets }
   );
 
   return {

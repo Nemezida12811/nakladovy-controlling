@@ -51,7 +51,7 @@ export function profitabilityCalculation(data: CellValue[][]) {
     c !== 0 ? formatNumber((netIncome[i] / c).toFixed(2)) : 0
   );
 
-  // Rentabilita celkového kapitálu = zisk / (aktíva)
+  // Rentabilita celkového kapitálu = zisk / (pasiva)
   const rck = passive.map((a, i) =>
     a !== 0 ? formatNumber((netIncome[i] / a).toFixed(2)) : 0
   );

@@ -30,27 +30,27 @@ const initialSortimentState: DefaultState = {
   ],
   values: [
     {
-      id: '7',
+      id: '1',
       value: '(Q) - objem výroby (množstvo)',
     },
     {
-      id: '6',
+      id: '2',
       value: 'jednotka množstva predajnej ceny',
     },
     {
-      id: '1',
+      id: '3',
       value: '(N<sub>p</sub>) - priame náklady (€)',
     },
     {
-      id: '5',
+      id: '4',
       value: '(ÚVNV) -  úplné vlastné náklady výkonu (€)',
     },
     {
-      id: '6',
+      id: '5',
       value: '(P<sub>cj</sub>) - predajná cena (jednotková) (€)',
     },
     {
-      id: '8',
+      id: '6',
       value: 'množstvo objemu výroby',
     },
   ],
@@ -80,6 +80,8 @@ const sortimentSlice = createSlice({
       state.items = initialSortimentState.items;
       state.values = initialSortimentState.values;
       state.text = initialSortimentState.text;
+      state.textConclusion = initialSortimentState.textConclusion;
+      state.textEvaluation = initialSortimentState.textEvaluation;
     },
     ...openProject,
   },

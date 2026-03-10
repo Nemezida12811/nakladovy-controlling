@@ -16,7 +16,6 @@ const initialProfitabilityState: profitabilityState = {
   id: 8,
   title: 'profitability analýza',
   corner: 'Ekonomické veličiny',
-  additionalData: {},
   headers: [
     {
       id: '1',
@@ -100,10 +99,6 @@ const profitabilitySlice = createSlice({
       state.values = initialProfitabilityState.values;
       state.text = initialProfitabilityState.text;
       state.additionalData = initialProfitabilityState.additionalData;
-    },
-    setAdditionalData: (state, action: PayloadAction<{ key: string; value: number | string }>) => {
-      if (!state.additionalData) state.additionalData = {};
-      (state.additionalData as any)[action.payload.key] = Number(action.payload.value);
     },
     openProject: (state: profitabilityState, action: PayloadAction<profitabilityState>) => {
       state.headers = action.payload.headers;

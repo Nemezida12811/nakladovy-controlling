@@ -16,7 +16,6 @@ const initialDebtsState: debtsState = {
   id: 9,
   title: 'debts analýza',
   corner: 'Ekonomické veličiny',
-  additionalData: {},
   headers: [
     {
       id: '1',
@@ -62,10 +61,6 @@ const initialDebtsState: debtsState = {
       id: '9',
       value: '(As) - stále aktíva (€)',
     },
-    {
-      id: '10',
-      value: '(Z<sub>min</sub>) minimálny zisk (€)',
-    },
   ],
   items: [
     '(Z<sub>d</sub>) - záväzky (dlhodobé) (€)',
@@ -109,10 +104,6 @@ const debtsSlice = createSlice({
       state.values = initialDebtsState.values;
       state.text = initialDebtsState.text;
       state.additionalData = initialDebtsState.additionalData;
-    },
-    setAdditionalData: (state, action: PayloadAction<{ key: string; value: number | string }>) => {
-      if (!state.additionalData) state.additionalData = {};
-      (state.additionalData as any)[action.payload.key] = Number(action.payload.value);
     },
     openProject: (state: debtsState, action: PayloadAction<debtsState>) => {
       state.headers = action.payload.headers;

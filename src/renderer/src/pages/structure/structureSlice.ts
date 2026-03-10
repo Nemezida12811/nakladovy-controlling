@@ -56,6 +56,8 @@ const structureSlice = createSlice({
       state.items = initialStructureState.items;
       state.values = initialStructureState.values;
       state.text = initialStructureState.text;
+      state.textConclusion = initialStructureState.textConclusion;
+      state.textEvaluation = initialStructureState.textEvaluation;
     },
     ...openProject,
     ...sortTableByItemNumber,

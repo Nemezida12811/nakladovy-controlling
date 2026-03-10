@@ -193,8 +193,8 @@ export const openProject = {
     state.items = action.payload.items;
     state.values = action.payload.values;
     state.text = action.payload.text;
-    state.textConclusion = action.payload.textConclusion; // ✅ додайте
-    state.textEvaluation = action.payload.textEvaluation; // ✅ додайте
+    state.textConclusion = action.payload.textConclusion ?? '';
+    state.textEvaluation = action.payload.textEvaluation ?? '';
     state.additionalData = action.payload.additionalData;
   },
 };

@@ -1,6 +1,6 @@
 import { structureCalculation } from '@renderer/pages/structure/structureCalculation';
 
-describe('economicCalculation', () => {
+describe('structureCalculation', () => {
   let result: ReturnType<typeof structureCalculation>;
   const data = [
     [6, 5],

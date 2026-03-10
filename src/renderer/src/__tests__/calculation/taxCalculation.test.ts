@@ -1,6 +1,6 @@
 import { taxCalculation } from '@renderer/pages/tax/taxCalculation';
 
-describe('economicCalculation', () => {
+describe('taxCalculation', () => {
   let result: ReturnType<typeof taxCalculation>;
   const data = [
     [6, 3, 10],

@@ -66,7 +66,7 @@ export default function IndexResult() {
       dispatch(
         indexActions.setAdditionalData({
           key: 'selectValues',
-          value: selectValues.slice(0, selectValues.length),
+          value: selectValues.slice(0, betweenYears.length),
         }),
       );
     }
@@ -79,7 +79,6 @@ export default function IndexResult() {
 
       <div>
         {items.filter(Boolean).map((item, index) => (
-          <>
             <Paper
               key={index}
               sx={{
@@ -139,7 +138,6 @@ export default function IndexResult() {
                 newPageAfter={false}
               />
             </Paper>
-          </>
         ))}
       </div>
 

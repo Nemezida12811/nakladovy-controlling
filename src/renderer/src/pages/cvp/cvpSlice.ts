@@ -84,6 +84,8 @@ const CVPSlice = createSlice({
       state.items = initialCVPState.items;
       state.values = initialCVPState.values;
       state.text = initialCVPState.text;
+      state.textConclusion = initialCVPState.textConclusion;
+      state.textEvaluation = initialCVPState.textEvaluation;
     },
     openProject: (state: CVPState, action: PayloadAction<CVPState>) => {
       state.headers = action.payload.headers;
@@ -93,6 +95,8 @@ const CVPSlice = createSlice({
       state.text = action.payload.text;
       state.fixTotal = action.payload.fixTotal;
       state.minProfit = action.payload.minProfit;
+      state.textConclusion = action.payload.textConclusion ?? '';
+      state.textEvaluation = action.payload.textEvaluation ?? '';
     },
   },
 });

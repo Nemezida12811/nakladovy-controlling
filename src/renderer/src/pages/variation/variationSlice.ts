@@ -78,7 +78,13 @@ export const variationSlice = createSlice({
   reducers: {
     ...rootReducer,
     reset: (state: DefaultState) => {
-      Object.assign(state, initialVariationState);
+      state.headers = initialVariationState.headers;
+      state.data = initialVariationState.data;
+      state.items = initialVariationState.items;
+      state.values = initialVariationState.values;
+      state.text = initialVariationState.text;
+      state.textConclusion = initialVariationState.textConclusion;
+      state.textEvaluation = initialVariationState.textEvaluation;
     },
     setAdditionalData: (state, action) => {
       const { key, value } = action.payload;

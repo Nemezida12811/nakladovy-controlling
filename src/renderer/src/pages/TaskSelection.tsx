@@ -76,13 +76,13 @@ const items: AnalysisItem[] = [
     to: RouteName.DEBTS_ANALYSIS,
     title: 'Finančná analýza zadlženosti',
     description:
-      'Hodnotenie použitia cudzieho kapitálu na aktivity podnikateľského subjektu a ich financovanie',
+      'Hodnotenie použitia cudzieho kapitálu na aktivity podnikateľského subjektu a ich financovanie.',
   },
   {
     to: RouteName.LIQUIDITY_ANALYSIS,
     title: 'Finančná analýza likvidity',
     description:
-      'Hodnotenie použitia cudzieho kapitálu na aktivity podnikateľského subjektu a ich financovanie',
+      'Hodnotenie schopnosti podnikateľského subjektu splácať záväzky, prevádzať majetok na pohotové finančné prostriedky.',
   },
 ];
 

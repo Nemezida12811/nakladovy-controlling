@@ -11,9 +11,6 @@ export default function DebtsResult() {
   const headers = useAppSelector(selectors.headers);
   const data = useAppSelector(selectors.data);
 
-  console.log('Original data:', data);
-  console.log('Headers:', headers);
-
   const { totalDebt, indepLevel, selfFinRatio, debtRatio,
     insolvencyInd, fixAssetsCovRatio } = debtsCalculation(data);
 
@@ -22,7 +19,7 @@ export default function DebtsResult() {
       <Spacer height={40} />
 
       <SectionTitle className={'new-page'}>
-        Ukazovatele aktivity
+        Ukazovatele zadlženosti
       </SectionTitle>
 
       <Paper>

@@ -16,7 +16,6 @@ const initialActivityState: activityState = {
   id: 8,
   title: 'activity analýza',
   corner: 'Ekonomické veličiny',
-  additionalData: {},
   headers: [
     {
       id: '1',
@@ -99,10 +98,6 @@ const activitySlice = createSlice({
       state.values = initialActivityState.values;
       state.text = initialActivityState.text;
       state.additionalData = initialActivityState.additionalData;
-    },
-    setAdditionalData: (state, action: PayloadAction<{ key: string; value: number | string }>) => {
-      if (!state.additionalData) state.additionalData = {};
-      (state.additionalData as any)[action.payload.key] = Number(action.payload.value);
     },
     openProject: (state: activityState, action: PayloadAction<activityState>) => {
       state.headers = action.payload.headers;

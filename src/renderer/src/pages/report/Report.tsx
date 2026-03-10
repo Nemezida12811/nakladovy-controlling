@@ -149,10 +149,10 @@ const Report: React.FC<Props> = ({
     !hasTrendChange &&
     !hasVariationChange &&
     !hasTaxChange &&
-    !hasProfitabilityChange;
-    !hasActivityChange;
-    !hasDebtsChange;
-    !hasProfitabilityChange;
+    !hasProfitabilityChange &&
+    !hasActivityChange &&
+    !hasDebtsChange &&
+    !hasLiquidityChange;
 
   const prevMode = useRef<ColorMode>();
 
@@ -365,27 +365,27 @@ const Report: React.FC<Props> = ({
             ...(hasActivityChange
               ? [
                 {
-                  label: 'Analýza rentability',
+                  label: 'Analýza aktivity',
                   id: RouteName.ACTIVITY_ANALYSIS,
                   ref: activityRef,
-                },
-              ]
-              : []),
-            ...(hasActivityChange
-              ? [
-                {
-                  label: 'Analýza rentability',
-                  id: RouteName.DEBTS_ANALYSIS,
-                  ref: debtsRef,
                 },
               ]
               : []),
             ...(hasDebtsChange
               ? [
                 {
-                  label: 'Analýza rentability',
-                  id: RouteName.PROFITABILITY_ANALYSIS,
-                  ref: profitabilityRef,
+                  label: 'Analýza zadlženosti',
+                  id: RouteName.DEBTS_ANALYSIS,
+                  ref: debtsRef,
+                },
+              ]
+              : []),
+            ...(hasLiquidityChange
+              ? [
+                {
+                  label: 'Analýza likvidity',
+                  id: RouteName.LIQUIDITY_ANALYSIS,
+                  ref: liquidityRef,
                 },
               ]
               : []),

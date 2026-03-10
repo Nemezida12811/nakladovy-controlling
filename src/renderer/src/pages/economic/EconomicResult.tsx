@@ -103,7 +103,7 @@ export default function EconomicResult() {
             ],
             [
               '(n<sub>hč</sub>) - nákladovosť hospodárskej činnosti',
-              '\\(\\frac{N_{d (541-549)}}{V}\\)',
+              '\\(\\frac{N_{hč (541-549)}}{V}\\)',
             ],
           ]}
           data={[

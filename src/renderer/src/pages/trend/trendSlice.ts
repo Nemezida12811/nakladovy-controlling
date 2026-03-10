@@ -66,6 +66,8 @@ export const trendSlice = createSlice({
       state.items = initialTrendState.items;
       state.values = initialTrendState.values;
       state.text = initialTrendState.text;
+      state.textConclusion = initialTrendState.textConclusion;
+      state.textEvaluation = initialTrendState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,

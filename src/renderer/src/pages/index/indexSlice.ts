@@ -80,6 +80,8 @@ export const indexSlice = createSlice({
       state.items = initialIndexState.items;
       state.values = initialIndexState.values;
       state.text = initialIndexState.text;
+      state.textConclusion = initialIndexState.textConclusion;
+      state.textEvaluation = initialIndexState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,

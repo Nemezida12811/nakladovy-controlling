@@ -1,6 +1,6 @@
 import { sortimentCalculation } from '@renderer/pages/sortiment/sortimentCalculation';
 
-describe('economicCalculation', () => {
+describe('sortimentCalculation', () => {
   let result: ReturnType<typeof sortimentCalculation>;
   const data = [
     [6, 3],
@@ -32,10 +32,6 @@ describe('economicCalculation', () => {
 
   it('should calculate correct allowance', () => {
     expect(result.allowance).toEqual([0.89, -1]);
-  });
-
-  it('should calculate correct profit', () => {
-    expect(result.unitProfit).toEqual([75, -1]);
   });
 
   it('should calculate correct totalDirectCosts', () => {

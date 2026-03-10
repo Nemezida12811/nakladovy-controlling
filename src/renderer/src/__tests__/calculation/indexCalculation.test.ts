@@ -1,6 +1,6 @@
 import { indexCalculation } from '@renderer/pages/index/indexCalculation';
 
-describe('economicCalculation', () => {
+describe('indexCalculation', () => {
   let result: ReturnType<typeof indexCalculation>;
   const data = [
     [6, 5, 1],

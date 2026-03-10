@@ -16,7 +16,6 @@ const initialLiquidityState: liquidityState = {
   id: 4,
   title: 'liquidity analýza',
   corner: 'Ekonomické veličiny',
-  additionalData: {},
   headers: [
     {
       id: '1',
@@ -75,10 +74,6 @@ const liquiditySlice = createSlice({
       state.values = initialLiquidityState.values;
       state.text = initialLiquidityState.text;
       state.additionalData = initialLiquidityState.additionalData;
-    },
-    setAdditionalData: (state, action: PayloadAction<{ key: string; value: number | string }>) => {
-      if (!state.additionalData) state.additionalData = {};
-      (state.additionalData as any)[action.payload.key] = Number(action.payload.value);
     },
     openProject: (state: liquidityState, action: PayloadAction<liquidityState>) => {
       state.headers = action.payload.headers;

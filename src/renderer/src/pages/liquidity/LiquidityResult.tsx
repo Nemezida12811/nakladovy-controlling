@@ -60,7 +60,7 @@ export default function LiquidityResult() {
             },
           ]}
           labels={headers.map((h) => h.label)}
-          yAxisLabel="liquidita () hodnoty"
+          yAxisLabel="likvidita () hodnoty"
         />
       </Paper>
     </div>

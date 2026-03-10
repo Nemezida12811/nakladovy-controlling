@@ -61,7 +61,7 @@ export function economicCalculation(
   }
   wageCostByYear = divideArrays(wageCostByYear, incomeByYear);
 
-  // 551-557 code of wage costs
+  // 551-557 code of depreciation costs
   const depreciationIndexes = values
     .map((v, i) => (Number(v.value) >= 551 && Number(v.value) <= 557 ? i : -1))
     .filter(i => i !== -1);

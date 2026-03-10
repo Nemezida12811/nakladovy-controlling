@@ -102,7 +102,7 @@ const BarGraph: React.FC<Props> = ({
           {showLegend && <Legend content={<CustomLegend />} />}
 
           {data.map((d, index) => (
-            <Bar dataKey={d.name} fill={getColorByIndex(index)}>
+            <Bar key={d.name} dataKey={d.name} fill={getColorByIndex(index)}>
               {showValueInBar && (
                 <LabelList
                   dataKey={d.name}

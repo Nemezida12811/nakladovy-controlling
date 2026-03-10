@@ -48,6 +48,8 @@ export const paretoSlice = createSlice({
       state.items = initialParetoState.items;
       state.values = initialParetoState.values;
       state.text = initialParetoState.text;
+      state.textConclusion = initialParetoState.textConclusion;
+      state.textEvaluation = initialParetoState.textEvaluation;
     },
     ...openProject,
   },
