@@ -16,6 +16,10 @@ import { useDataSave } from './AnalysisSaveProvider';
 import { RouteName, routes } from '@renderer/routes';
 import { useSnackbar } from './SnackbarProvider';
 import { useUpdateSnackbar } from './UpdateSnackbarProvider';
+import { debtsActions } from '@renderer/pages/debts/debtsSlice';
+import { liquidityActions } from '@renderer/pages/liquidity/liquiditySlice';
+import { profitabilityActions } from '@renderer/pages/profitability/profitabilitySlice';
+import { activityActions } from '@renderer/pages/activity/activitySlice';
 
 type ProjectContextProps = {
   newProject: () => void;
@@ -50,6 +54,10 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
     dispatch(variationActions.reset());
     dispatch(taxActions.reset());
     dispatch(trendActions.reset());
+    dispatch(debtsActions.reset());
+    dispatch(liquidityActions.reset());
+    dispatch(profitabilityActions.reset());
+    dispatch(activityActions.reset());
     dispatch(projectActions.setCreated());
     resetPath();
     navigate('/taskselect');
@@ -70,6 +78,10 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
       dispatch(variationActions.openProject(json.variation));
       dispatch(taxActions.openProject(json.tax));
       dispatch(trendActions.openProject(json.trend));
+      dispatch(debtsActions.openProject(json.debts));
+      dispatch(liquidityActions.openProject(json.liquidity));
+      dispatch(profitabilityActions.openProject(json.profitability));
+      dispatch(activityActions.openProject(json.activity));
       dispatch(projectActions.setCreated());
       navigate('/taskselect');
     });

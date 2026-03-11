@@ -84,7 +84,8 @@ const initialProfitabilityState: profitabilityState = {
   sortable: true,
   hasAnalytic: false,
   dynRows: false,
-  dynCols: true
+  dynCols: true,
+  additionalData: undefined,
 };
 
 const profitabilitySlice = createSlice({

@@ -17,6 +17,10 @@ import { selectEvaluation } from '@renderer/pages/report/evaluationSlice';
 import { selectVariation } from '@renderer/pages/variation/variationSlice';
 import { selectTax } from '@renderer/pages/tax/taxSlice';
 import { selectTrend } from '@renderer/pages/trend/trendSlice';
+import { selectDebts } from '@renderer/pages/debts/debtsSlice';
+import { selectLiquidity } from '@renderer/pages/liquidity/liquiditySlice';
+import { selectProfitability } from '@renderer/pages/profitability/profitabilitySlice';
+import { selectActivity } from '@renderer/pages/activity/activitySlice';
 
 type SaveContextProps = {
   save: VoidFunction;
@@ -38,6 +42,10 @@ const SaveDataProvider: React.FC<Props> = ({ children }) => {
   const variation = useAppSelector(selectVariation);
   const tax = useAppSelector(selectTax);
   const trend = useAppSelector(selectTrend);
+  const debts = useAppSelector(selectDebts);
+  const liquidity = useAppSelector(selectLiquidity);
+  const profitability = useAppSelector(selectProfitability);
+  const activity = useAppSelector(selectActivity);
 
   const { tasks } = useAppSelector(selectEvaluation);
 
@@ -60,6 +68,10 @@ const SaveDataProvider: React.FC<Props> = ({ children }) => {
       tax,
       trend,
       tasks,
+      debts,
+      liquidity,
+      profitability,
+      activity,
     });
 
     return oldString !== newString && onceSaved;
@@ -76,6 +88,10 @@ const SaveDataProvider: React.FC<Props> = ({ children }) => {
     tasks,
     trend,
     onceSaved,
+    debts,
+    liquidity,
+    profitability,
+    activity,
   ]);
 
   const save = async () => {
@@ -100,6 +116,10 @@ const SaveDataProvider: React.FC<Props> = ({ children }) => {
       tax,
       trend,
       tasks,
+      debts,
+      liquidity,
+      profitability,
+      activity,
     };
 
     const json = JSON.stringify({

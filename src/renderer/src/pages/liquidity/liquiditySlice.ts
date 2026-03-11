@@ -74,6 +74,8 @@ const liquiditySlice = createSlice({
       state.values = initialLiquidityState.values;
       state.text = initialLiquidityState.text;
       state.additionalData = initialLiquidityState.additionalData;
+      state.textConclusion = initialLiquidityState.textConclusion;
+      state.textEvaluation = initialLiquidityState.textEvaluation;
     },
     openProject: (state: liquidityState, action: PayloadAction<liquidityState>) => {
       state.headers = action.payload.headers;
@@ -82,6 +84,8 @@ const liquiditySlice = createSlice({
       state.values = action.payload.values;
       state.text = action.payload.text;
       state.additionalData = action.payload.additionalData;
+      state.textConclusion = action.payload.textConclusion ?? '';
+      state.textEvaluation = action.payload.textEvaluation ?? '';
     },
     ...sortTableByYear,
   },

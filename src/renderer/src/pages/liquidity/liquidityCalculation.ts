@@ -2,7 +2,6 @@ import { CellValue } from '@renderer/store/rootReducer';
 import { formatNumber } from '@renderer/utils/formatNumber';
 
 export function liquidityCalculation(data: CellValue[][]) {
-  console.log('Calculation input data:', data);
 
   const colCount = data[0]?.length ?? 0;
 

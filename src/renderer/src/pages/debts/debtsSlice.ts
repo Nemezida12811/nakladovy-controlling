@@ -89,7 +89,8 @@ const initialDebtsState: debtsState = {
   sortable: true,
   hasAnalytic: false,
   dynRows: false,
-  dynCols: true
+  dynCols: true,
+  additionalData: undefined,
 };
 
 const debtsSlice = createSlice({

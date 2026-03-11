@@ -2,7 +2,6 @@ import { CellValue } from '@renderer/store/rootReducer';
 import { formatNumber } from '@renderer/utils/formatNumber';
 
 export function profitabilityCalculation(data: CellValue[][]) {
-  console.log('Calculation input data:', data);
 
   const colCount = data[0]?.length ?? 0;
 
@@ -65,9 +64,6 @@ export function profitabilityCalculation(data: CellValue[][]) {
   const rt = sales.map((s, i) =>
     s !== 0 ? formatNumber((netIncome[i] / s).toFixed(2)) : 0
   );
-
-
-  console.log('Calculation results:', { roi, roa, roe, rvy, rnk, rck, rvk, rt });
 
   return {
     roi: roi,

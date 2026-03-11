@@ -65,7 +65,7 @@ const VariationResults = () => {
         }),
       );
     }
-  }, [items.length]);
+  }, [items.length, selectValues, dispatch]);
 
   useEffect(() => {
     if (selectValuesType.length < items.length) {
@@ -83,7 +83,7 @@ const VariationResults = () => {
         }),
       );
     }
-  }, [items.length]);
+  }, [items.length, selectValuesType, dispatch]);
 
   return (
     <div>

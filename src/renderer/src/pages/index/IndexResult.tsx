@@ -79,65 +79,65 @@ export default function IndexResult() {
 
       <div>
         {items.filter(Boolean).map((item, index) => (
-            <Paper
-              key={index}
+          <Paper
+            key={index}
+            sx={{
+              '&:not(:last-child)': {
+                marginBottom: '40px',
+              },
+              pageBreakInside: 'avoid',
+            }}
+          >
+            <Typography
+              variant="h6"
+              gutterBottom
               sx={{
-                '&:not(:last-child)': {
-                  marginBottom: '40px',
-                },
-                pageBreakInside: 'avoid',
+                marginLeft: 2,
+                marginTop: 1,
+                fontSize: '18px',
               }}
             >
-              <Typography
-                variant="h6"
-                gutterBottom
-                sx={{
-                  marginLeft: 2,
-                  marginTop: 1,
-                  fontSize: '18px',
-                }}
-              >
-                {item}
-              </Typography>
-              <TableStatic
-                corner={'Ekonomické ukazovatele'}
-                header={headers.slice(1).map((h) => h.label)}
-                inputs={[
-                  [
-                    '(I<sub>b</sub>) - bázický index',
-                    `\\(I_{b} = \\frac{N_{i}}{N_{b}}\\)`,
-                  ],
-                  [
-                    '(AD<sub>b</sub>) - absolútna diferencia (bázická)',
-                    `\\(AD_{b} = N_{i} - N_{b}\\)`,
-                  ],
-                ]}
-                data={[bazickyIndex[index], absolutnaDiferencia[index]]}
-                newPageAfter={false}
-              />
+              {item}
+            </Typography>
+            <TableStatic
+              corner={'Ekonomické ukazovatele'}
+              header={headers.slice(1).map((h) => h.label)}
+              inputs={[
+                [
+                  '(I<sub>b</sub>) - bázický index',
+                  `\\(I_{b} = \\frac{N_{i}}{N_{b}}\\)`,
+                ],
+                [
+                  '(AD<sub>b</sub>) - absolútna diferencia (bázická)',
+                  `\\(AD_{b} = N_{i} - N_{b}\\)`,
+                ],
+              ]}
+              data={[bazickyIndex[index], absolutnaDiferencia[index]]}
+              newPageAfter={false}
+            />
 
-              <Spacer height={20} />
+            <Spacer height={20} />
 
-              <TableStatic
-                corner={'Ekonomické ukazovatele'}
-                header={betweenYears}
-                inputs={[
-                  [
-                    '(I<sub>r</sub>) - reťazový index',
-                    `\\(I_{r} = \\frac{N_{i+1}}{N_{i}}\\)`,
-                  ],
-                  [
-                    '(AD<sub>r</sub>) - absolútna diferencia (reťazová)',
-                    `\\(AD_{r} = N_{i+1} - N_{i}\\)`,
-                  ],
-                ]}
-                data={[
-                  retazovyIndexNakladov[index],
-                  absolutnaDiferenciaNakladov[index],
-                ]}
-                newPageAfter={false}
-              />
-            </Paper>
+            <TableStatic
+              corner={'Ekonomické ukazovatele'}
+              header={betweenYears}
+              inputs={[
+                [
+                  '(I<sub>r</sub>) - reťazový index',
+                  `\\(I_{r} = \\frac{N_{i+1}}{N_{i}}\\)`,
+                ],
+                [
+                  '(AD<sub>r</sub>) - absolútna diferencia (reťazová)',
+                  `\\(AD_{r} = N_{i+1} - N_{i}\\)`,
+                ],
+              ]}
+              data={[
+                retazovyIndexNakladov[index],
+                absolutnaDiferenciaNakladov[index],
+              ]}
+              newPageAfter={false}
+            />
+          </Paper>
         ))}
       </div>
 
@@ -157,7 +157,7 @@ export default function IndexResult() {
               `\\(N_{c}\\) = \\(\\sum N\\)`,
             ],
           ]}
-          data={[incomeSumsForYears,costSumsForYears]}
+          data={[incomeSumsForYears, costSumsForYears]}
           newPageAfter={false}
         />
       </Paper>
@@ -200,7 +200,7 @@ export default function IndexResult() {
                   'proporcionálny (Kr=1)',
                   'degresívny (0<Kr<1)',
                   'progresívny (Kr>1)',
-                  'regresívny (Kr< 0)',
+                  'regresívny (Kr≤0)',
                 ]}
               />
             )),

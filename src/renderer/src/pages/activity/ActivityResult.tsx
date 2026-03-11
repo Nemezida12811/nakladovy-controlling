@@ -12,9 +12,6 @@ export default function ActivityResult() {
   const headers = useAppSelector(selectors.headers);
   const data = useAppSelector(selectors.data);
 
-  console.log('Original data:', data);
-  console.log('Headers:', headers);
-
   //const transposed = transposeMatrix(data);
   //console.log('Transposed data:', transposed);
 

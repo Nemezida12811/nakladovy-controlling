@@ -98,6 +98,9 @@ const activitySlice = createSlice({
       state.values = initialActivityState.values;
       state.text = initialActivityState.text;
       state.additionalData = initialActivityState.additionalData;
+      state.textConclusion = initialActivityState.textConclusion;
+      state.textEvaluation = initialActivityState.textEvaluation;
+
     },
     openProject: (state: activityState, action: PayloadAction<activityState>) => {
       state.headers = action.payload.headers;
@@ -106,6 +109,8 @@ const activitySlice = createSlice({
       state.values = action.payload.values;
       state.text = action.payload.text;
       state.additionalData = action.payload.additionalData;
+      state.textConclusion = action.payload.textConclusion ?? '';
+      state.textEvaluation = action.payload.textEvaluation ?? '';
     },
     ...sortTableByYear,
   },
