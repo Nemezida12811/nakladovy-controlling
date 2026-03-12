@@ -59,7 +59,8 @@ const initialLiquidityState: liquidityState = {
   sortable: true,
   hasAnalytic: false,
   dynRows: false,
-  dynCols: true
+  dynCols: true,
+  additionalData: undefined,
 };
 
 const liquiditySlice = createSlice({

@@ -105,6 +105,8 @@ const debtsSlice = createSlice({
       state.values = initialDebtsState.values;
       state.text = initialDebtsState.text;
       state.additionalData = initialDebtsState.additionalData;
+      state.textConclusion = initialDebtsState.textConclusion;
+      state.textEvaluation = initialDebtsState.textEvaluation;
     },
     openProject: (state: debtsState, action: PayloadAction<debtsState>) => {
       state.headers = action.payload.headers;
@@ -113,6 +115,8 @@ const debtsSlice = createSlice({
       state.values = action.payload.values;
       state.text = action.payload.text;
       state.additionalData = action.payload.additionalData;
+      state.textConclusion = action.payload.textConclusion ?? '';
+      state.textEvaluation = action.payload.textEvaluation ?? '';
     },
     ...sortTableByYear,
   },

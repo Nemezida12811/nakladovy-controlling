@@ -78,10 +78,10 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
       dispatch(variationActions.openProject(json.variation));
       dispatch(taxActions.openProject(json.tax));
       dispatch(trendActions.openProject(json.trend));
-      dispatch(debtsActions.openProject(json.debts));
-      dispatch(liquidityActions.openProject(json.liquidity));
-      dispatch(profitabilityActions.openProject(json.profitability));
-      dispatch(activityActions.openProject(json.activity));
+      if (json.debts) dispatch(debtsActions.openProject(json.debts));
+      if (json.liquidity) dispatch(liquidityActions.openProject(json.liquidity));
+      if (json.profitability) dispatch(profitabilityActions.openProject(json.profitability));
+      if (json.activity) dispatch(activityActions.openProject(json.activity));
       dispatch(projectActions.setCreated());
       navigate('/taskselect');
     });

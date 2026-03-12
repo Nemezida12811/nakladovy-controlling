@@ -100,6 +100,8 @@ const profitabilitySlice = createSlice({
       state.values = initialProfitabilityState.values;
       state.text = initialProfitabilityState.text;
       state.additionalData = initialProfitabilityState.additionalData;
+      state.textConclusion = initialProfitabilityState.textConclusion;
+      state.textEvaluation = initialProfitabilityState.textEvaluation;
     },
     openProject: (state: profitabilityState, action: PayloadAction<profitabilityState>) => {
       state.headers = action.payload.headers;
@@ -108,6 +110,8 @@ const profitabilitySlice = createSlice({
       state.values = action.payload.values;
       state.text = action.payload.text;
       state.additionalData = action.payload.additionalData;
+      state.textConclusion = action.payload.textConclusion ?? '';
+      state.textEvaluation = action.payload.textEvaluation ?? '';
     },
     ...sortTableByYear,
   },
