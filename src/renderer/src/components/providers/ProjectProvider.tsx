@@ -20,6 +20,7 @@ import { debtsActions } from '@renderer/pages/debts/debtsSlice';
 import { liquidityActions } from '@renderer/pages/liquidity/liquiditySlice';
 import { profitabilityActions } from '@renderer/pages/profitability/profitabilitySlice';
 import { activityActions } from '@renderer/pages/activity/activitySlice';
+import { isElectron } from '@renderer/utils/environment';
 
 type ProjectContextProps = {
   newProject: () => void;
@@ -64,27 +65,42 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   };
 
   const openProject = () => {
-    window.electron.openProject();
-    window.electron.onOpen('open', (arg) => {
-      const json = JSON.parse(arg);
+    if (isElectron()) {
+      window.electron.openProject();
+      window.electron.onOpen('open', (arg) => {
+        loadProjectData(JSON.parse(arg));
+      });
+    } else {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = async (e) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+        const text = await file.text();
+        loadProjectData(JSON.parse(text));
+      };
+      input.click();
+    }
+  };
 
-      dispatch(economicActions.openProject(json.economic));
-      dispatch(structureActions.openProject(json.structure));
-      dispatch(CVPActions.openProject(json.cvp));
-      dispatch(indexActions.openProject(json.chain));
-      dispatch(sortimentActions.openProject(json.sortiment));
-      dispatch(paretoActions.openProject(json.pareto));
-      dispatch(evaluationActions.openProject(json.tasks));
-      dispatch(variationActions.openProject(json.variation));
-      dispatch(taxActions.openProject(json.tax));
-      dispatch(trendActions.openProject(json.trend));
-      if (json.debts) dispatch(debtsActions.openProject(json.debts));
-      if (json.liquidity) dispatch(liquidityActions.openProject(json.liquidity));
-      if (json.profitability) dispatch(profitabilityActions.openProject(json.profitability));
-      if (json.activity) dispatch(activityActions.openProject(json.activity));
-      dispatch(projectActions.setCreated());
-      navigate('/taskselect');
-    });
+  const loadProjectData = (json: any) => {
+    dispatch(economicActions.openProject(json.economic));
+    dispatch(structureActions.openProject(json.structure));
+    dispatch(CVPActions.openProject(json.cvp));
+    dispatch(indexActions.openProject(json.chain));
+    dispatch(sortimentActions.openProject(json.sortiment));
+    dispatch(paretoActions.openProject(json.pareto));
+    dispatch(evaluationActions.openProject(json.tasks));
+    dispatch(variationActions.openProject(json.variation));
+    dispatch(taxActions.openProject(json.tax));
+    dispatch(trendActions.openProject(json.trend));
+    if (json.debts) dispatch(debtsActions.openProject(json.debts));
+    if (json.liquidity) dispatch(liquidityActions.openProject(json.liquidity));
+    if (json.profitability) dispatch(profitabilityActions.openProject(json.profitability));
+    if (json.activity) dispatch(activityActions.openProject(json.activity));
+    dispatch(projectActions.setCreated());
+    navigate('/taskselect');
   };
 
   const saveProject = () => {
@@ -97,12 +113,19 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
     const routeDetails = routes[pathname as RouteName];
 
     if (routeDetails.printToPDF) {
-      const isGenerated = await window.electron.printToPdf(routeDetails.title);
+      if (isElectron()) {
+        const isGenerated = await window.electron.printToPdf(
+          routeDetails.title,
+        );
 
-      if (isGenerated) {
-        open('PDF sa úspešne vygenerovalo');
+        if (isGenerated) {
+          open('PDF sa úspešne vygenerovalo');
+        } else {
+          open('PDF sa nepodarilo vygenerovať');
+        }
       } else {
-        open('PDF sa nepodarilo vygenerovať');
+        window.print();
+        open('Bol otvorený dialóg tlače');
       }
     }
   };
@@ -113,6 +136,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('menu-new-project');
     window.electron.ipcRenderer.on('menu-new-project', newProject);
 
@@ -122,6 +146,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [newProject]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('menu-open-project');
     window.electron.ipcRenderer.on('menu-open-project', openProject);
 
@@ -131,6 +156,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [openProject]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('menu-save-project');
     window.electron.ipcRenderer.on('menu-save-project', saveProject);
 
@@ -140,6 +166,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [saveProject]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('menu-print-project');
     window.electron.ipcRenderer.on('menu-print-project', printAnalysis);
 
@@ -149,6 +176,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [printAnalysis]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('menu-open-report');
     window.electron.ipcRenderer.on('menu-open-report', openReport);
 
@@ -158,6 +186,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [openReport]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('update-start');
     window.electron.ipcRenderer.on('update-start', openUpdate);
 
@@ -167,6 +196,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [openUpdate]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('update-end');
     window.electron.ipcRenderer.on('update-end', closeUpdate);
 
@@ -176,6 +206,7 @@ const ProjectProvider: React.FC<Props> = ({ children }) => {
   }, [closeUpdate]);
 
   useEffect(() => {
+    if (!isElectron()) return;
     window.electron.ipcRenderer.removeAllListeners('update-progress');
     window.electron.ipcRenderer.on('update-progress', (_, progress) => {
       updateProgress(progress);

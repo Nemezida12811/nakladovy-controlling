@@ -8,6 +8,7 @@ import Page from '@renderer/components/layout/Page';
 import PageContent from '@renderer/components/layout/PageContent';
 import { RouteName } from '@renderer/routes';
 import { useProject } from '@renderer/components/providers/ProjectProvider';
+import { isElectron } from '@renderer/utils/environment';
 
 const Wrapper = styled(Box)`
   flex: 1;
@@ -32,7 +33,9 @@ export default function WelcomePage() {
   };
 
   const quit = () => {
-    window.electron.quit();
+    if (isElectron()) {
+      window.electron.quit();
+    }
   };
 
   return (
@@ -81,9 +84,11 @@ export default function WelcomePage() {
                   <WelcomeButton onClick={openReport}>Report</WelcomeButton>
                 </Grid>
               )}
-              <Grid item xs={12}>
-                <WelcomeButton onClick={quit}>Ukončiť projekt</WelcomeButton>
-              </Grid>
+              {isElectron() && (
+                <Grid item xs={12}>
+                  <WelcomeButton onClick={quit}>Ukončiť projekt</WelcomeButton>
+                </Grid>
+              )}
             </Grid>
           </Box>
         </Wrapper>

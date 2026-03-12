@@ -1,13 +1,18 @@
 import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { isElectron } from '@renderer/utils/environment';
 
 const AppVersion = () => {
   const [version, setVersion] = useState('');
 
   useEffect(() => {
     const fetchVersion = async () => {
-      const appVersion = await window.electron.getAppVersion();
-      setVersion(appVersion);
+      if (isElectron()) {
+        const appVersion = await window.electron.getAppVersion();
+        setVersion(appVersion);
+      } else {
+        setVersion('web-version');
+      }
     };
 
     fetchVersion();

@@ -487,6 +487,14 @@ textarea {
 }
 
 @media print {
+  header, nav, .MuiSnackbar-root, .MuiAppBar-root {
+      display: none !important;
+  }
+
+  @page {
+      margin: 0;
+  }
+
   .page-break {
     page-break-before: always;
     break-before: page;

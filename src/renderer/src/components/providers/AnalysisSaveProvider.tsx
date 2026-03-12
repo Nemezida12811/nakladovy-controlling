@@ -21,6 +21,7 @@ import { selectDebts } from '@renderer/pages/debts/debtsSlice';
 import { selectLiquidity } from '@renderer/pages/liquidity/liquiditySlice';
 import { selectProfitability } from '@renderer/pages/profitability/profitabilitySlice';
 import { selectActivity } from '@renderer/pages/activity/activitySlice';
+import { isElectron } from '@renderer/utils/environment';
 
 type SaveContextProps = {
   save: VoidFunction;
@@ -95,16 +96,6 @@ const SaveDataProvider: React.FC<Props> = ({ children }) => {
   ]);
 
   const save = async () => {
-    let tempPath;
-
-    if (!onceSaved) {
-      tempPath = await window.electron.chooseFilePath();
-
-      setPath(tempPath);
-    } else {
-      tempPath = path;
-    }
-
     const newData = {
       economic,
       sortiment,
@@ -122,17 +113,41 @@ const SaveDataProvider: React.FC<Props> = ({ children }) => {
       activity,
     };
 
-    const json = JSON.stringify({
-      path: tempPath,
-      data: newData,
-    });
+    if (isElectron()) {
+      let tempPath;
 
-    const isSaved = await window.electron.saveProject(json);
-    if (isSaved) {
-      setOldData(newData);
-      open('Súbor bol uložený.');
+      if (!onceSaved) {
+        tempPath = await window.electron.chooseFilePath();
+        setPath(tempPath);
+      } else {
+        tempPath = path;
+      }
+
+      const json = JSON.stringify({
+        path: tempPath,
+        data: newData,
+      });
+
+      const isSaved = await window.electron.saveProject(json);
+      if (isSaved) {
+        setOldData(newData);
+        open('Súbor bol uložený.');
+      } else {
+        open('Súbor sa nepodarilo uložiť.');
+      }
     } else {
-      open('Súbor sa nepodarilo uložiť.');
+      const json = JSON.stringify(newData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'projekt.json';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      setOldData(newData);
+      open('Súbor bol stiahnutý.');
+      setPath('web-saved');
     }
   };
 
