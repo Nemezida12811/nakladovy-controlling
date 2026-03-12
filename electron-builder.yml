@@ -7,7 +7,7 @@ win:
   target:
     - target: nsis
       arch: x64
-  icon: icon.png
+  icon: icon-512.png
 nsis:
   artifactName: ${name}-v${version}-win.${ext}
   shortcutName: ${productName}
@@ -20,7 +20,7 @@ linux:
   target:
     - AppImage
     - deb
-  icon: icon.png
+  icon: icon-512.png
   artifactName: ${name}-v${version}-linux.${ext}
   category: Utility
   desktop:

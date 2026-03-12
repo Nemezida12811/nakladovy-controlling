@@ -9,7 +9,7 @@ import {
 import { join } from 'path';
 
 import { optimizer, is, electronApp } from '@electron-toolkit/utils';
-import icon from '../../assets/icon.png?asset';
+import icon from '../../assets/icon-512.png?asset';
 import MenuBuilder from './menu';
 import path from 'path';
 import fs from 'fs';
@@ -99,7 +99,7 @@ const createWindow = async () => {
     show: false,
     autoHideMenuBar: false,
     ...(process.platform === 'linux' ? { icon } : {}),
-    icon: getAssetPath('icon.png'),
+    icon: getAssetPath('icon-512.png'),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
