@@ -188,7 +188,7 @@ export default function App() {
   );
 
   return (
-    <MathJaxContext version={3} src="/mathjax.js">
+    <MathJaxContext version={3} src={import.meta.env.BASE_URL + 'mathjax.js'}>
       <Provider store={store}>
         <ThemeProvider>
           <ErrorProvider>
