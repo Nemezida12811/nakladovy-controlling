@@ -27,46 +27,46 @@ const initialActivityState: activityState = {
   values: [
     {
       id: '1',
-      value: '(CK) - celkový kapitál (€)',
+      value: '(CuK) - cudzí kapitál (€)',
     },
     {
       id: '2',
-      value: '(T) - tržby (€)',
-    },
-    {
-      id: '3',
       value: '(VK) - vlastný kapitál (€)',
     },
     {
+      id: '3',
+      value: '(A) - aktíva (€)',
+    },
+    {
       id: '4',
-      value: '(Z) - zásoby (€)',
+      value: '(DM) - dlhodobý majetok (€)',
     },
     {
       id: '5',
-      value: '(P) - pohľadávky (€)',
+      value: '(Z) - zásoby (€)',
     },
     {
       id: '6',
-      value: '(Záv) - záväzky (€)',
+      value: '(P) - pohľadávky (€)',
     },
     {
       id: '7',
-      value: '(As) - aktíva stále (€)',
+      value: '(Zk) - záväzky krátkodobé (€)',
     },
     {
       id: '8',
-      value: '(Ac) - aktíva celkové (€)',
+      value: '(T) - tržby (€)',
     },
   ],
   items: [
-    '(K<sub>c</sub>) - kapitál celkový (€)',
-    '(T) - tržby (€)',
-    '(K<sub>v</sub>) - kapitál vlastný (€)',
+    '(CuK) - cudzí kapitál (€)',
+    '(VK) - vlastný kapitál (€)',
+    '(A) - aktíva (€)',
+    '(DM) - dlhodobý majetok (€)',
     '(Z) - zásoby (€)',
     '(P) - pohľadávky (€)',
-    '(Záv) - záväzky (€)',
-    '(A<sub>s</sub>) - aktíva stále (€)',
-    '(A<sub>c</sub>) - aktíva celkové (€)',
+    '(Zk) - záväzky krátkodobé (€)',
+    '(T) - tržby (€)',
   ],
   rowTypes: [
     CellType.NUMBER,

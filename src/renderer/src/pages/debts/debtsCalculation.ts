@@ -5,64 +5,68 @@ export function debtsCalculation(data: CellValue[][]) {
 
   const colCount = data[0]?.length ?? 0;
 
-  const longTermLiab: number[] = [];      // Dlhodobé záväzky
-  const shortTermLiab: number[] = [];     // Krátkodobé záväzky
-  const totalAssets: number[] = [];       // Aktíva celkom
-  const totalLiab: number[] = [];         // Cudzí kapitál
-  const equity: number[] = [];            // Vlastný kapitál
-  const totalCapital: number[] = [];      // Celkový kapitál
+  const debtCapital: number[] = [];       // Cudzí kapitál
+  const ownCapital: number[] = [];        // Vlastný kapitál
+  const assets: number[] = [];            // Aktíva
   const liabilities: number[] = [];       // Záväzky
   const receivables: number[] = [];       // Pohľadávky
-  const fixedAssets: number[] = [];       // Stále aktíva
+  const fixedAssets: number[] = [];       // Dlhodobý majetok
+  const longTermLiab: number[] = [];      // Dlhodobé záväzky
+  const shortTermLiab: number[] = [];     // Krátkodobé záväzky
 
   for (let col = 0; col < colCount; col++) {
-    longTermLiab[col] = Number(data[0]?.[col]) || 0;
-    shortTermLiab[col] = Number(data[1]?.[col]) || 0;
-    totalAssets[col]  = Number(data[2]?.[col]) || 0;
-    totalLiab[col]    = Number(data[3]?.[col]) || 0;
-    equity[col]       = Number(data[4]?.[col]) || 0;
-    totalCapital[col] = Number(data[5]?.[col]) || 0;
-    liabilities[col]  = Number(data[6]?.[col]) || 0;
-    receivables[col]  = Number(data[7]?.[col]) || 0;
-    fixedAssets[col]  = Number(data[8]?.[col]) || 0;
+    debtCapital[col] = Number(data[0]?.[col]) || 0;
+    ownCapital[col] = Number(data[1]?.[col]) || 0;
+    assets[col]  = Number(data[2]?.[col]) || 0;
+    liabilities[col]    = Number(data[3]?.[col]) || 0;
+    receivables[col]       = Number(data[4]?.[col]) || 0;
+    fixedAssets[col] = Number(data[5]?.[col]) || 0;
+    longTermLiab[col]  = Number(data[6]?.[col]) || 0;
+    shortTermLiab[col]  = Number(data[7]?.[col]) || 0;
   }
 
-  // Celková zadlženosť
-  const totalDebt = totalAssets.map((assets, i) =>
-    assets !== 0 ? formatNumber(((longTermLiab[i] + shortTermLiab[i]) / assets).toFixed(2)) : 0
-  );
-
-  // Stupeň finančnej samostatnosti
-  const indepLevel = equity.map((eq, i) =>
-    eq !== 0 ? formatNumber((totalLiab[i] / eq).toFixed(2)) : 0
+  // (CK) celkový kapitál = CuK+VK
+  const totalCapital = debtCapital.map((d, i) =>
+    formatNumber(d + ownCapital[i])
   );
 
   // Stupeň samofinancovania
-  const selfFinRatio = totalCapital.map((cap, i) =>
-    cap !== 0 ? formatNumber((equity[i] / cap).toFixed(2)) : 0
+  const selfFinRatio = totalCapital.map((t, i) =>
+    t !== 0 ? formatNumber((ownCapital[i] / t).toFixed(2)) : 0
   );
 
   // Stupeň zadlženosti
-  const debtRatio = totalCapital.map((cap, i) =>
-    cap !== 0 ? formatNumber((totalLiab[i] / cap).toFixed(2)) : 0
+  const debtRatio = totalCapital.map((t, i) =>
+    t !== 0 ? formatNumber((debtCapital[i] / t).toFixed(2)) : 0
   );
 
   // Platobná neschopnosť
   const insolvencyInd = receivables.map((rec, i) =>
-    rec !== 0 ? formatNumber((liabilities[i] / rec).toFixed(2)) : 0
+    rec !== 0 ? formatNumber(((longTermLiab[i] + shortTermLiab[i])/ rec).toFixed(2)) : 0
   );
 
   // Krytie investičného majetku
   const fixAssetsCovRatio = fixedAssets.map((fa, i) =>
-    fa !== 0 ? formatNumber((totalLiab[i] / fa).toFixed(2)) : 0
+    fa !== 0 ? formatNumber((totalCapital[i] / fa).toFixed(2)) : 0
+  );
+
+  // Celková zadlženosť
+  const totalDebt = assets.map((a, i) =>
+    a !== 0 ? formatNumber(((longTermLiab[i] + shortTermLiab[i]) / a).toFixed(2)) : 0
+  );
+
+  // Stupeň finančnej samostatnosti
+  const indepLevel = assets.map((a, i) =>
+    a !== 0 ? formatNumber((ownCapital[i] / a).toFixed(2)) : 0
   );
 
   return {
-    totalDebt,
-    indepLevel,
+    totalCapital,
     selfFinRatio,
     debtRatio,
     insolvencyInd,
-    fixAssetsCovRatio
+    fixAssetsCovRatio,
+    totalDebt,
+    indepLevel,
   };
 }

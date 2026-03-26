@@ -15,8 +15,9 @@ export default function ActivityResult() {
   //const transposed = transposeMatrix(data);
   //console.log('Transposed data:', transposed);
 
-  const { turnoverTotalCapital, turnoverEquity, turnoverInventory,
-    turnoverReceivables, turnoverPayables, turnoverFixedAssets, turnoverTotalAssets} = activityCalculation(data);
+  const { totalCapital, turnoverTotalCapital, turnoverEquity,
+    turnoverInventory, coa, turnoverReceivables, turnoverPayables,
+    turnoverFixedAssets, turnoverTotalAssets,} = activityCalculation(data);
 
   return (
     <div>
@@ -31,16 +32,20 @@ export default function ActivityResult() {
           corner={'Ekonomické ukazovatele'}
           header={headers.map(h => h.label)}
           inputs={[
-            ['DO (celkového kapitálu) (dni)', `\\( D_{CK} = \\frac{CK}{T} \\times 360 \\)`],
-            ['DO (vlastného kapitálu) (dni)', `\\( D_{VK} = \\frac{VK}{T} \\times 360 \\)`],
-            ['DO (zásob) (dni)', `\\( D_{Z} = \\frac{Z}{T} \\times 360 \\)`],
-            ['DO (pohľadávok) (dni)', `\\( D_{P} = \\frac{P}{T} \\times 360 \\)`],
-            ['DO (záväzkov) (dni)', `\\( D_{Záv} = \\frac{Záv}{T} \\times 360 \\)`],
-            ['DO (stálych aktív) (dni)', `\\( D_{As} = \\frac{As}{T} \\times 360 \\)`],
-            ['DO (celkových aktív) (dni)', `\\( D_{Ac} = \\frac{Ac}{T} \\times 360 \\)`],
+            ['(CK) celkový kapitál (€)', ` CK = CuK + VK `],
+            ['Doba obratu celkového kapitálu (dni)', `\\( D_{CK} = \\frac{CK}{T} \\times 365 \\)`],
+            ['Doba obratu vlastného kapitálu (dni)', `\\( D_{VK} = \\frac{VK}{T} \\times 365 \\)`],
+            ['Doba obratu zásob (dni)', `\\( D_{Z} = \\frac{Z}{T} \\times 365 \\)`],
+            ['Doba obratu pohľadávok (dni)', `\\( D_{P} = \\frac{P}{T} \\times 365 \\)`],
+            ['Doba obratu záväzkov (dni)', `\\( D_{Zk} = \\frac{Zk}{T} \\times 365 \\)`],
+            ['Doba obratu dlhodobého majetku (stálych aktív) (dni)', `\\( D_{DM} = \\frac{DM}{T} \\times 365 \\)`],
+            ['Doba obratu celkových aktív (dni)', `\\( D_{A} = \\frac{A}{T} \\times 365 \\)`],
+            ['Celkový obrat aktív ()', `\\( COA = \\frac{T}{A} \\)`],
+
           ]}
-          data={[turnoverTotalCapital, turnoverEquity, turnoverInventory,
-            turnoverReceivables, turnoverPayables, turnoverFixedAssets, turnoverTotalAssets]}
+          data={[totalCapital, turnoverTotalCapital, turnoverEquity,
+            turnoverInventory, turnoverReceivables, turnoverPayables,
+            turnoverFixedAssets, turnoverTotalAssets, coa,]}
         />
       </Paper>
 
@@ -54,31 +59,31 @@ export default function ActivityResult() {
           height={420}
           data={[
             {
-              name: 'DO (celkového kapitálu)',
+              name: 'Doba obratu celkového kapitálu',
               values: turnoverTotalCapital,
             },
             {
-              name: 'DO (vlastného kapitálu)',
+              name: 'Doba obratu vlastného kapitálu',
               values: turnoverEquity,
             },
             {
-              name: 'DO (zásob)',
+              name: 'Doba obratu zásob',
               values: turnoverInventory,
             },
             {
-              name: 'DO (pohľadávok)',
+              name: 'Doba obratu pohľadávok',
               values: turnoverReceivables,
             },
             {
-              name: 'DO (záväzkov) ',
+              name: 'Doba obratu záväzkov',
               values: turnoverPayables,
             },
             {
-              name: 'DO (stálych aktív)',
+              name: 'Doba obratu dlhodobého majetku (stálych aktív)',
               values: turnoverFixedAssets,
             },
             {
-              name: 'DO (celkových aktív)',
+              name: 'Doba obratu celkových aktív',
               values: turnoverTotalAssets,
             },
           ]}
@@ -86,6 +91,38 @@ export default function ActivityResult() {
           yAxisLabel="(dni)"
         />
       </Paper>
+      <Spacer height={40} hideInPrint />
+      <Paper>
+        <BarGraph
+          title=""
+          height={420}
+          data={[
+            {
+              name: '(CK) celkový kapitál',
+              values: totalCapital,
+            },
+          ]}
+          labels={headers.map((h) => h.label)}
+          yAxisLabel="celkový kapitál (€)"
+        />
+      </Paper>
+      <Spacer height={40} hideInPrint />
+      <Paper>
+        <BarGraph
+          title=""
+          height={420}
+          data={[
+            {
+              name: 'Celkový obrat aktív',
+              values: coa,
+            },
+          ]}
+          labels={headers.map((h) => h.label)}
+          yAxisLabel="Celkový obrat aktív ()"
+        />
+      </Paper>
+
+
     </div>
   );
 }

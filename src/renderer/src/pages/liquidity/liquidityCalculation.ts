@@ -35,11 +35,22 @@ export function liquidityCalculation(data: CellValue[][]) {
       ? formatNumber(((finAssets[i] + shortTermReceiv[i] + res) / shortTermLiabil[i]).toFixed(2)) : 0
   );
 
-  console.log('Calculation results:', {
-    immediateLiq, currentLiq, totalLiquidity }
+  // Čistý peňažný kapitál = (FM + Pk + Z) - Zk
+  const netMonetaryCapital = resources.map((res, i) =>
+      formatNumber(((finAssets[i] + shortTermReceiv[i] + res) - shortTermLiabil[i]).toFixed(2))
+  );
+
+  // Čistý peňažný majetok = (FM + Pk) - Zk
+  const netMonetaryAssets = finAssets.map((f, i) =>
+    formatNumber(((f + shortTermReceiv[i]) - shortTermLiabil[i]).toFixed(2))
+  );
+
+  // Čisté pohotové prostriedky = FM - Zk
+  const netReadyFunds = finAssets.map((f, i) =>
+    formatNumber((f - shortTermLiabil[i]).toFixed(2))
   );
 
   return {
-    immediateLiq, currentLiq, totalLiquidity
+    immediateLiq, currentLiq, totalLiquidity, netMonetaryCapital, netMonetaryAssets, netReadyFunds
   };
 }
