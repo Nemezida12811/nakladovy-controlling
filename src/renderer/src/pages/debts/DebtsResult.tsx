@@ -94,7 +94,6 @@ export default function DebtsResult() {
           title=""
           height={420}
           data={[
-            { name: 'Celkový kapitál', values: totalCapital },
             { name: 'Stupeň samofinancovania', values: selfFinRatio },
             { name: 'Stupeň zadlženosti', values: debtRatio },
             { name: 'Platobná neschopnosť', values: insolvencyInd },
@@ -103,7 +102,19 @@ export default function DebtsResult() {
             { name: 'Stupeň finančnej samostatnosti', values: indepLevel },
           ]}
           labels={headers.map((h) => h.label)}
-          yAxisLabel="debts () hodnoty"
+          yAxisLabel="zadlženosť () hodnoty"
+        />
+      </Paper>
+      <Spacer height={40} hideInPrint />
+      <Paper>
+        <BarGraph
+          title=""
+          height={420}
+          data={[
+            { name: 'Celkový kapitál', values: totalCapital },
+          ]}
+          labels={headers.map((h) => h.label)}
+          yAxisLabel="Celkový kapitál (€) "
         />
       </Paper>
 
