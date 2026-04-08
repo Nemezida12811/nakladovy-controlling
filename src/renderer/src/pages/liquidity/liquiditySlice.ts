@@ -35,18 +35,18 @@ const initialLiquidityState: liquidityState = {
     },
     {
       id: '3',
-      value: '(Pk) - Pohľadávky krátkodobé (€)',
+      value: '(Pk) - pohľadávky krátkodobé (€)',
     },
     {
       id: '4',
-      value: '(Z) - Zásoby (€)'
+      value: '(Z) - zásoby (€)'
     },
   ],
   items: [
     '(FM) - finančný majetok (€)',
     '(Zk) - záväzky krátkodobé (€)',
-    '(Pk) - Pohľadávky krátkodobé (€)',
-    '(Z) - Zásoby (€)'
+    '(Pk) - pohľadávky krátkodobé (€)',
+    '(Z) - zásoby (€)'
   ],
   rowTypes: [
     CellType.NUMBER,

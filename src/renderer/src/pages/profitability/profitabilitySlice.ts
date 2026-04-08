@@ -24,52 +24,64 @@ const initialProfitabilityState: profitabilityState = {
     },
 
   ],
-  data: [[0], [0], [0], [0], [0], [0], [0], [0]],
+  data: [[0], [0], [0], [0], [0], [0], [0], [0], [0], [0]],
   values: [
     {
       id: '1',
-      value: '(Z) - zisk (čistý) (€)',
-    },
-    {
-      id: '2',
-      value: '(Ú) - úrok (€)',
-    },
-    {
-      id: '3',
-      value: '(T) - tržby (€)',
-    },
-    {
-      id: '4',
       value: '(A) - aktíva (€)',
     },
     {
-      id: '5',
-      value: '(P) - pasiva (€)',
+      id: '2',
+      value: '(P) - pasíva (€)',
+    },
+    {
+      id: '3',
+      value: '(V) - výnosy (€)',
+    },
+    {
+      id: '4',
+      value: '(T) - tržby (€)',
     },
     {
       id: '6',
-      value: '(VK) - vlastný kapitál (€)',
-    },
-    {
-      id: '7',
       value: '(N) - náklady (€)',
     },
     {
+      id: '7',
+      value: '(D) - daň z príjmov (€)',
+    },
+    {
+      id: '7',
+      value: '(Ú) - úroky (€)'
+    },
+    {
       id: '8',
-      value: '(HV) - hospodársky výsledok po zdanení (€)',
+      value: '(VK) - vlastný kapitál (€)'
+    },
+    {
+      id: '9',
+      value: '(CuK) - cudzí kapitál (€)'
+    },
+    {
+      id: '10',
+      value: '(I) - investícia (€)'
     },
   ],
   items: [
-    '(Z) - zisk (čistý) (€)',
-    '(Ú) - úrok (€)',
-    '(T) - tržby (€)',
     '(A) - aktíva (€)',
-    '(P) - pasiva (€)',
-    '(VK) - vlastný kapitál (€)',
+    '(P) - pasíva (€)',
+    '(V) - výnosy (€)',
+    '(T) - tržby (€)',
     '(N) - náklady (€)',
-    '(HV) - hospodársky výsledok po zdanení (€)',
+    '(D) - daň z príjmov (€)',
+    '(Ú) - úroky (€)',
+    '(VK) - vlastný kapitál (€)',
+    '(CuK) - cudzí kapitál (€)',
+    '(I) - investícia (€)',
   ],
   rowTypes: [
+    CellType.NUMBER,
+    CellType.NUMBER,
     CellType.NUMBER,
     CellType.NUMBER,
     CellType.NUMBER,

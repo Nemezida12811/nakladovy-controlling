@@ -14,7 +14,8 @@ export default function ProfitabilityResult() {
   console.log('Original data:', data);
   console.log('Headers:', headers);
 
-  const { roi, roa, roe, rvy, rnk, rck, rvk, rt } = profitabilityCalculation(data);
+  const {netProfit, roi, ros, roa, roe, rcuk, rck, rv, rn, }
+    = profitabilityCalculation(data);
 
   return (
     <div>
@@ -29,16 +30,17 @@ export default function ProfitabilityResult() {
           corner={'Ekonomické ukazovatele'}
           header={headers.map(h => h.label)}
           inputs={[
-            ['(ROI) - Return on Investment', `\\( ROI = \\frac{Z + Ú}{T} \\)`],
-            ['(ROA) - Return on Assets', `\\( ROA = \\frac{Z}{A} \\)`],
-            ['(ROE) - Return on Equity', `\\( ROE = \\frac{Z}{VK} \\)`],
-            ['(R<sub>vý</sub>) - rentabilita výnosov', `\\( R_{vý} = \\frac{HV}{T} \\)`],
-            ['(R<sub>nk</sub>) - rentabilita nákladov', `\\( R_{nk} = \\frac{HV}{N} \\)`],
-            ['(R<sub>ck</sub>) - rentabilita celkového kapitálu', `\\( R_{ck} = \\frac{HV}{P} \\)`],
-            ['(R<sub>vk</sub>) - rentabilita vlastného kapitálu', `\\( R_{vk} = \\frac{HV}{VK} \\)`],
-            ['(R<sub>t</sub>) - rentabilita tržieb', `\\( R_{t} = \\frac{HV}{T} \\)`],
+            ['(Zč) - Zisk čistý', ` Zč = V - N - D`],
+            ['(ROI) - Return on Investment rentabilita investície', `\\( ROI = \\frac{Z}{I} \\)`],
+            ['(ROS) - Return on Sales rentabilita tržieb ', `\\( ROS = \\frac{Zč}{T} \\)`],
+            ['(ROA) - rentabilita aktív', `\\( ROA = \\frac{Zč}{A} \\)`],
+            ['(ROE) - rentabilita vlastného kapitálu', `\\( ROE = \\frac{Zč}{VK} \\)`],
+            ['(R<sub>cuk</sub>) - rentabilita cudzieho kapitálu', `\\( R_{cuk} = \\frac{Zč}{CK} \\)`],
+            ['(RCK) - rentabilita celkového kapitálu', `\\( RCK = \\frac{Zč}{P} \\)`],
+            ['(R<sub>v</sub>) - rentabilita výnosov', `\\( R_{v} = \\frac{Zč}{V} \\)`],
+            ['(R<sub>n</sub>) - rentabilta nákladov', `\\( R_{n} = \\frac{Zč}{N} \\)`],
           ]}
-          data={[roi, roa, roe, rvy, rnk, rck, rvk, rt]}
+          data={[netProfit, roi, ros, roa, roe, rcuk, rck, rv, rn]}
         />
       </Paper>
 
@@ -48,12 +50,31 @@ export default function ProfitabilityResult() {
 
       <Paper>
         <BarGraph
-          title=""
+          title="Zisk čistý"
+          height={420}
+          data={[
+            {
+              name: 'Zisk čistý',
+              values: netProfit,
+            },
+          ]}
+          labels={headers.map((h) => h.label)}
+          yAxisLabel="Zisk čistý (€)"
+        />
+      </Paper>
+      <Spacer height={40} hideInPrint />
+      <Paper>
+        <BarGraph
+          title="Ukazovatele rentability"
           height={420}
           data={[
             {
               name: 'ROI',
               values: roi,
+            },
+            {
+              name: 'ROS',
+              values: ros,
             },
             {
               name: 'ROA',
@@ -64,30 +85,28 @@ export default function ProfitabilityResult() {
               values: roe,
             },
             {
-              name: 'Rentabilita výnosov',
-              values: rvy,
-            },
-            {
-              name: 'Rentabilita nákladov',
-              values: rnk,
+              name: 'Rentabilita cudzieho kapitálu',
+              values: rcuk,
             },
             {
               name: 'Rentabilita celkového kapitálu',
               values: rck,
             },
             {
-              name: 'Rentabilita vlastného kapitálu',
-              values: rvk,
+              name: 'Rentabilita výnosov',
+              values: rv,
             },
             {
-              name: 'Rentabilita tržieb',
-              values: rt,
+              name: 'Rentabilta nákladov',
+              values: rn,
             },
           ]}
           labels={headers.map((h) => h.label)}
           yAxisLabel="rentabilita () hodnoty"
         />
+
       </Paper>
+
     </div>
   );
 }

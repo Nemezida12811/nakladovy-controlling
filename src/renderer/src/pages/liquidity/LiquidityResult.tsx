@@ -11,7 +11,8 @@ export default function LiquidityResult() {
   const headers = useAppSelector(selectors.headers);
   const data = useAppSelector(selectors.data);
 
-  const { immediateLiq, currentLiq, totalLiquidity } = liquidityCalculation(data);
+  const { immediateLiq, currentLiq, totalLiquidity, netMonetaryCapital,
+    netMonetaryAssets, netReadyFunds } = liquidityCalculation(data);
 
   return (
     <div>
@@ -26,11 +27,29 @@ export default function LiquidityResult() {
           corner={'Ekonomické ukazovatele'}
           header={headers.map(h => h.label)}
           inputs={[
-            ['(Ol) okamžitá likvidita (likvidita 1. stupeňa)', `\\( Ol = \\frac{FM}{Zk} \\)`],
-            ['(Bl) bežná likvidita (likvidita 2. stupeňa)', `\\( Bl = \\frac{FM + Pk}{Zk} \\)`],
-            ['(Cl) celková likvidita', `\\( Cl = \\frac{FM + Pk + Z}{Zk} \\)`],
+            ['okamžitá likvidita', `\\( Ol = \\frac{FM}{Zk} \\)`],
+            ['bežná likvidita', `\\( Bl = \\frac{FM + Pk}{Zk} \\)`],
+            ['celková likvidita', `\\( Cl = \\frac{FM + Pk + Z}{Zk} \\)`],
+            ['čistý peňažný kapitál', `\\( CPK = (FM + Pk + Z) - Zk \\)`],
+            ['čistý peňažný majetok', `\\( CPM = (FM + Pk) - Zk \\)`],
+            ['čisté pohotové prostriedky', `\\( CPP = FM - Zk \\)`],
           ]}
-          data={ [immediateLiq, currentLiq, totalLiquidity] }
+          data={ [immediateLiq, currentLiq, totalLiquidity, netMonetaryCapital, netMonetaryAssets, netReadyFunds] }
+        />
+      </Paper>
+
+      <Spacer height={40} hideInPrint />
+
+      <Paper>
+        <TableStatic
+          corner={'Likvidita'}
+          header={['Optimálna hodnota', 'Kritická hodnota']}
+          inputs={[
+            ['Okamžitá'],
+            ['Bežná',],
+            ['Celková',],
+          ]}
+          data={ [ ['0,2-0,5', '>0,5'], ['1-1,5', '<0.7'], ['1,5-2,5', '<1.0'],] }
         />
       </Paper>
 
@@ -44,16 +63,28 @@ export default function LiquidityResult() {
           height={420}
           data={[
             {
-              name: '(Ol) okamžitá likvidita (likvidita 1. stupeňa)',
+              name: 'okamžitá likvidita',
               values: immediateLiq,
             },
             {
-              name: '(Bl) bežná likvidita (likvidita 2. stupeňa)',
+              name: 'bežná likvidita',
               values: currentLiq,
             },
             {
-              name: '(Cl) celková likvidita',
+              name: 'celková likvidita',
               values: totalLiquidity,
+            },
+            {
+              name: 'čistý peňažný kapitál',
+              values: netMonetaryCapital,
+            },
+            {
+              name: 'čistý peňažný majetok',
+              values: netMonetaryAssets,
+            },
+            {
+              name: 'čisté pohotové prostriedky',
+              values: netReadyFunds,
             },
           ]}
           labels={headers.map((h) => h.label)}

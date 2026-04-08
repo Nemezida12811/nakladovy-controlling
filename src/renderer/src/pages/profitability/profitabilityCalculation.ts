@@ -5,74 +5,84 @@ export function profitabilityCalculation(data: CellValue[][]) {
 
   const colCount = data[0]?.length ?? 0;
 
-  const netProfit: number[] = [];    // zisk
-  const percent: number[] = [];      // úrok
-  const sales: number[] = [];        // tržby
   const assets: number[] = [];       // aktíva
   const passive: number[] = [];      // pasiva
-  const capital: number[] = [];      // vlastný kapitál
+  const revenue: number[] = [];      // výnosy
+  const sales: number[] = [];        // tržby
   const costs: number[] = [];        // náklady
-  const netIncome: number[] = [];    // hospodársky výsledok po zdanení
+  const incomeTax: number[] = [];    // daň z príjmov
+  const percent: number[] = [];      // úrok
+  const capital: number[] = [];      // vlastný kapitál
+  const debtCapital: number[] = [];  // cudzí kapitál
+  const investment: number[] = [];   // investícia
 
   for (let col = 0; col < colCount; col++) {
-    netProfit[col] = Number(data[0]?.[col]) || 0;
-    percent[col]   = Number(data[1]?.[col]) || 0;
-    sales[col]     = Number(data[2]?.[col]) || 0;
-    assets[col]    = Number(data[3]?.[col]) || 0;
-    passive[col]   = Number(data[4]?.[col]) || 0;
-    capital[col]   = Number(data[5]?.[col]) || 0;
-    costs[col]     = Number(data[6]?.[col]) || 0;
-    netIncome[col] = Number(data[7]?.[col]) || 0;
+    assets[col]      = Number(data[0]?.[col]) || 0;
+    passive[col]     = Number(data[1]?.[col]) || 0;
+    revenue[col]     = Number(data[2]?.[col]) || 0;
+    sales[col]       = Number(data[3]?.[col]) || 0;
+    costs[col]       = Number(data[4]?.[col]) || 0;
+    incomeTax[col]   = Number(data[5]?.[col]) || 0;
+    percent[col]     = Number(data[6]?.[col]) || 0;
+    capital[col]     = Number(data[7]?.[col]) || 0;
+    debtCapital[col] = Number(data[8]?.[col]) || 0;
+    investment[col]  = Number(data[9]?.[col]) || 0;
   }
 
-  // ROI = (zisk + úrok) / tržby
-  const roi = sales.map((s, i) =>
-    s !== 0 ? formatNumber(((netProfit[i] + percent[i]) / s).toFixed(2)) : 0
+  // čistý zisk = výnosy - náklady - daň z príjmov
+  const netProfit = revenue.map((r, i) =>
+    formatNumber(r - costs[i] - incomeTax[i])
   );
 
-  // ROA = zisk / aktíva
+  // ROI = zisk / investícia
+  const roi = investment.map((s, i) =>
+    s !== 0 ? formatNumber(((revenue[i] - costs[i]) / s).toFixed(2)) : 0
+  );
+
+  // ROS = čistý zisk / tržby
+  const ros = sales.map((s, i) =>
+    s !== 0 ? formatNumber(netProfit[i] / s) : 0
+  );
+
+  // ROA =  Zisk čistý / aktíva
   const roa = assets.map((a, i) =>
     a !== 0 ? formatNumber((netProfit[i] / a).toFixed(2)) : 0
   );
 
-  // ROE = zisk / vlastný kapitál
+  // ROE = Zisk čistý / vlastný kapitál
   const roe = capital.map((c, i) =>
     c !== 0 ? formatNumber((netProfit[i] / c).toFixed(2)) : 0
   );
 
-  // Rentabilita výnosov = zisk / výnosy
-  const rvy = sales.map((s, i) =>
-    s !== 0 ? formatNumber((netProfit[i] / s).toFixed(2)) : 0
+  // Rcuk = čistý zisk / cudzí kapitál
+  const rcuk = debtCapital.map((c, i) =>
+    c !== 0 ? formatNumber((netProfit[i] / c).toFixed(2)) : 0
   );
 
-  // Rentabilita nákladov = zisk / náklady
-  const rnk = costs.map((c, i) =>
-    c !== 0 ? formatNumber((netIncome[i] / c).toFixed(2)) : 0
+  // RCK = čistý zisk / pasíva
+  const rck = passive.map((p, i) =>
+    p !== 0 ? formatNumber((netProfit[i] / p).toFixed(2)) : 0
   );
 
-  // Rentabilita celkového kapitálu = zisk / (pasiva)
-  const rck = passive.map((a, i) =>
-    a !== 0 ? formatNumber((netIncome[i] / a).toFixed(2)) : 0
+  // Rentabilita výnosov = čistý zisk  / výnosy
+  const rv = revenue.map((r, i) =>
+    r !== 0 ? formatNumber((netProfit[i] / r).toFixed(2)) : 0
   );
 
-  // Rentabilita vlastného kapitálu = zisk / vlastný kapitál
-  const rvk = capital.map((c, i) =>
-    c !== 0 ? formatNumber((netIncome[i] / c).toFixed(2)) : 0
-  );
-
-  // Rentabilita tržieb = zisk / tržby
-  const rt = sales.map((s, i) =>
-    s !== 0 ? formatNumber((netIncome[i] / s).toFixed(2)) : 0
+  // Rentabilita nákladov = čistý zisk  / náklady
+  const rn = costs.map((c, i) =>
+    c !== 0 ? formatNumber((netProfit[i] / c).toFixed(2)) : 0
   );
 
   return {
+    netProfit: netProfit,
     roi: roi,
+    ros: ros,
     roa: roa,
     roe: roe,
-    rvy: rvy,
-    rnk: rnk,
+    rcuk: rcuk,
     rck: rck,
-    rvk: rvk,
-    rt: rt,
+    rv: rv,
+    rn: rn,
   };
 }

@@ -23,58 +23,53 @@ const initialDebtsState: debtsState = {
       label: '2000',
     },
   ],
-  data: [[0], [0], [0], [0], [0], [0], [0], [0], [0]],
+  data: [[0], [0], [0], [0], [0], [0], [0], [0]],
   values: [
     {
       id: '1',
-      value: '(Zd) - záväzky dlhodobé (€)',
+      value: '(CuK) - сudzí kapitál (€)',
     },
     {
       id: '2',
-      value: '(Zk) - záväzky krátkodobé (€)',
-    },
-    {
-      id: '3',
-      value: '(AC) - aktíva celkom (€)',
-    },
-    {
-      id: '4',
-      value: '(CK) - cudzí kapitál (€)',
-    },
-    {
-      id: '5',
       value: '(VK) - vlastný kapitál (€)',
     },
     {
+      id: '3',
+      value: '(A) - aktíva (€)',
+    },
+    {
+      id: '4',
+      value: '(Z) - záväzky (€)',
+    },
+    {
+      id: '5',
+      value: '(P) - pohľadávky (€)',
+    },
+    {
       id: '6',
-      value: '(CK) - celkový kapitál (€)',
+      value: '(DM) - dlhodobý majetok (€)',
     },
     {
       id: '7',
-      value: '(Záv) - záväzky (€)',
+      value: '(Zd) - záväzky dlhodobé (€)',
     },
     {
       id: '8',
-      value: '(Poh) - pohľadávky (€)',
+      value: '(Zk) - záväzky krátkodobé (€)',
     },
-    {
-      id: '9',
-      value: '(As) - stále aktíva (€)',
-    },
+
   ],
   items: [
-    '(Z<sub>d</sub>) - záväzky (dlhodobé) (€)',
-    '(Z<sub>k</sub>) - záväzky (krátkodobé) (€)',
-    '(A<sub>c</sub>) - aktíva (celkom) (€)',
-    '(K<sub>c</sub>) - kapitál (cudzí)(€)',
-    '(K<sub>v</sub>) - kapitál (vlastný) (€)',
-    '(K<sub>c</sub>) - kapitál (celkový) (€)',
-    '(Záv) - záväzky (€)',
-    '(Poh) - pohľadávky (€)',
-    '(A<sub>s</sub>) - aktíva (stále) (€)',
+    '(CuK) - cudzí kapitál (€)',
+    '(VK) - vlastný kapitál (€)',
+    '(A) - aktíva (€)',
+    '(Z) - záväzky (€)',
+    '(P) - pohľadávky (€)',
+    '(DM) - dlhodobý majetok (€)',
+    '(Zd) - záväzky dlhodobé (€)',
+    '(Zk) - záväzky krátkodobé (€)',
   ],
   rowTypes: [
-    CellType.NUMBER,
     CellType.NUMBER,
     CellType.NUMBER,
     CellType.NUMBER,
