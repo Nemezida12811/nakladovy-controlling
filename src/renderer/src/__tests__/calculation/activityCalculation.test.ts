@@ -4,45 +4,53 @@ describe('activityCalculation', () => {
   let result: ReturnType<typeof activityCalculation>;
 
   const data = [
-    [1000, 500],
-    [5000, 2000],
-    [400, 200],
-    [300, 100],
-    [200, 50],
-    [150, 60],
-    [800, 300],
-    [1500, 600],
+    [1000, 500],   // debtCapital
+    [5000, 2000],  // ownCapital
+    [400, 200],    // assets
+    [300, 100],    // longTermAssets
+    [200, 50],     // inventory
+    [150, 60],     // receivables
+    [800, 300],    // shortTermLiabil
+    [1500, 600],   // sales
   ];
 
   beforeAll(() => {
     result = activityCalculation(data);
   });
 
+  it('should calculate correct totalCapital', () => {
+    expect(result.totalCapital).toEqual([6000, 2500]);
+  });
+
   it('should calculate correct turnoverTotalCapital', () => {
-    expect(result.turnoverTotalCapital).toEqual([72, 90]);
-  });
-
-  it('should calculate correct turnoverEquity', () => {
-    expect(result.turnoverEquity).toEqual([28.8, 36]);
-  });
-
-  it('should calculate correct turnoverInventory', () => {
-    expect(result.turnoverInventory).toEqual([21.6, 18]);
-  });
-
-  it('should calculate correct turnoverReceivables', () => {
-    expect(result.turnoverReceivables).toEqual([14.4, 9]);
-  });
-
-  it('should calculate correct turnoverPayables', () => {
-    expect(result.turnoverPayables).toEqual([10.8, 10.8]);
+    expect(result.turnoverTotalCapital).toEqual([1460, 1520.83]);
   });
 
   it('should calculate correct turnoverFixedAssets', () => {
-    expect(result.turnoverFixedAssets).toEqual([57.6, 54]);
+    expect(result.turnoverFixedAssets).toEqual([73, 60.83]);
   });
 
   it('should calculate correct turnoverTotalAssets', () => {
-    expect(result.turnoverTotalAssets).toEqual([108, 108]);
+    expect(result.turnoverTotalAssets).toEqual([97.33, 121.67]);
+  });
+
+  it('should calculate correct coa', () => {
+    expect(result.coa).toEqual([3.75, 3.00]);
+  });
+
+  it('should calculate correct turnoverEquity', () => {
+    expect(result.turnoverEquity).toEqual([1216.67, 1216.67]);
+  });
+
+  it('should calculate correct turnoverInventory', () => {
+    expect(result.turnoverInventory).toEqual([48.67, 30.42]);
+  });
+
+  it('should calculate correct turnoverReceivables', () => {
+    expect(result.turnoverReceivables).toEqual([36.50, 36.50]);
+  });
+
+  it('should calculate correct turnoverPayables', () => {
+    expect(result.turnoverPayables).toEqual([194.67, 182.50]);
   });
 });
