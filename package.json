@@ -48,6 +48,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.16.7",
+    "@mui/material-nextjs": "^9.0.0",
     "@reduxjs/toolkit": "^2.2.7",
     "better-react-mathjax": "^2.0.3",
     "electron-log": "^5.2.4",

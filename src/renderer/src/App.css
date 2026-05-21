@@ -2,6 +2,7 @@
   outline: 1px solid red !important;
 } */
 
+
 body {
   padding: 0;
   margin: 0;
@@ -487,6 +488,36 @@ textarea {
 }
 
 @media print {
+    .MuiGrid-container {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    .MuiGrid-item {
+        padding-left: 0 !important;
+    }
+
+    .MuiPaper-root {
+        margin-left: 30px !important;
+    }
+
+    * {
+      overflow: visible !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+  }
+
+  body.web-version .MuiTable-root {
+      zoom: 2;
+  }
+
+  body.web-version .task-container {
+      zoom: 3;
+  }
+
+
   header, nav, .MuiSnackbar-root, .MuiAppBar-root {
       display: none !important;
   }
