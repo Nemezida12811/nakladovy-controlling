@@ -11,7 +11,7 @@ export default function ParetoResult() {
   const data = useAppSelector(selectors.data);
   const items = useAppSelector(selectors.items);
 
-  const { values, valuesKumul, percentagesKumul, percentages, causes } =
+  const { values, valuesKumul, percentagesKumul, percentages, causes, sum } =
     paretoCalculation(data as number[][], items);
 
   return (
@@ -28,9 +28,12 @@ export default function ParetoResult() {
             '(ŠK) Štruktúra kumulovaná (%)',
             'Kategória',
           ]}
-          inputs={[...causes.map((value: string) => [value, ''])]}
-          data={values.map((value: number, idx: number) => {
-            return [
+          inputs={[
+            ...causes.map((value: string) => [value, '']),
+            ['Nc - náklady celkové (€)', ''],
+          ]}
+          data={[
+            ...values.map((value: number, idx: number) => [
               value,
               valuesKumul[idx],
               percentages[idx],
@@ -40,9 +43,17 @@ export default function ParetoResult() {
                 : percentagesKumul[idx] > 80
                   ? 'B'
                   : 'A',
-            ];
-          })}
+            ]),
+            [
+              sum,
+              '',
+              '',
+              '',
+              '',
+            ],
+          ]}
         />
+
       </Paper>
 
       <Spacer height={40} hideInPrint />
@@ -71,6 +82,12 @@ export default function ParetoResult() {
             stroke: 'red',
             width: 46,
             y: '80',
+          },
+          {
+            label: '95%',
+            stroke: 'red',
+            width: 46,
+            y: '95',
           },
         ]}
       />

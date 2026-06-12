@@ -17,6 +17,7 @@ import { RootSelectors, RootState } from '@renderer/store/store';
 import isEqual from 'lodash.isequal';
 
 const initialTrendState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 1,
   title: 'Trendová analýza nákladov',
   corner: 'Ekonomická veličina (€)',
@@ -51,7 +52,7 @@ const initialTrendState: DefaultState = {
   dynRows: true,
   dynCols: true,
   itemSelectOptions: allOptions,
-  newRowType: CellType.NUMBER,
+  newRowType: CellType.NUMBER
 };
 
 export const trendSlice = createSlice({
@@ -65,6 +66,8 @@ export const trendSlice = createSlice({
       state.items = initialTrendState.items;
       state.values = initialTrendState.values;
       state.text = initialTrendState.text;
+      state.textConclusion = initialTrendState.textConclusion;
+      state.textEvaluation = initialTrendState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,
@@ -118,8 +121,12 @@ export const selectors: RootSelectors = {
     [(state: RootState) => state.trend.dynCols],
     (dynCols) => dynCols,
   ),
-  text: createSelector(
-    [(state: RootState) => state.trend.text],
+  textConclusion: createSelector(
+    [(state: RootState) => state.trend.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.trend.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

@@ -66,7 +66,7 @@ export default function IndexResult() {
       dispatch(
         indexActions.setAdditionalData({
           key: 'selectValues',
-          value: selectValues.slice(0, selectValues.length - 1),
+          value: selectValues.slice(0, betweenYears.length),
         }),
       );
     }
@@ -75,73 +75,73 @@ export default function IndexResult() {
   return (
     <>
       <Spacer height={40} hideInPrint />
-      <SectionTitle className="new-page">Analýza ukazovateľov</SectionTitle>
+      <SectionTitle>Analýza ukazovateľov</SectionTitle>
 
       <div>
         {items.filter(Boolean).map((item, index) => (
-          <>
-            <Paper
-              key={index}
+          <Paper
+            key={index}
+            sx={{
+              '&:not(:last-child)': {
+                marginBottom: '40px',
+              },
+              pageBreakInside: 'avoid',
+            }}
+          >
+            <Typography
+              variant="h6"
+              gutterBottom
               sx={{
-                '&:not(:last-child)': {
-                  marginBottom: '40px',
-                },
+                marginLeft: 2,
+                marginTop: 1,
+                fontSize: '18px',
               }}
             >
-              <Typography
-                variant="h6"
-                gutterBottom
-                sx={{
-                  marginLeft: 2,
-                  marginTop: 1,
-                  fontSize: '18px',
-                }}
-              >
-                {item}
-              </Typography>
-              <TableStatic
-                corner={'Ekonomické ukazovatele'}
-                header={headers.slice(1).map((h) => h.label)}
-                inputs={[
-                  [
-                    '(I<sub>b</sub>) - bázický index',
-                    `\\(I_{b} = \\frac{N_{i}}{N_{b}}\\)`,
-                  ],
-                  [
-                    '(AD<sub>b</sub>) - absolútna diferencia (bázická)',
-                    `\\(AD_{b} = N_{i} - N_{b}\\)`,
-                  ],
-                ]}
-                data={[bazickyIndex[index], absolutnaDiferencia[index]]}
-                newPageAfter={false}
-              />
+              {item}
+            </Typography>
+            <TableStatic
+              corner={'Ekonomické ukazovatele'}
+              header={headers.slice(1).map((h) => h.label)}
+              inputs={[
+                [
+                  '(I<sub>b</sub>) - bázický index',
+                  `\\(I_{b} = \\frac{N_{i}}{N_{b}}\\)`,
+                ],
+                [
+                  '(AD<sub>b</sub>) - absolútna diferencia (bázická)',
+                  `\\(AD_{b} = N_{i} - N_{b}\\)`,
+                ],
+              ]}
+              data={[bazickyIndex[index], absolutnaDiferencia[index]]}
+              newPageAfter={false}
+            />
 
-              <Spacer height={20} />
+            <Spacer height={20} />
 
-              <TableStatic
-                corner={'Ekonomické ukazovatele'}
-                header={betweenYears}
-                inputs={[
-                  [
-                    '(I<sub>r</sub>) - reťazový index',
-                    `\\(I_{r} = \\frac{N_{i+1}}{N_{i}}\\)`,
-                  ],
-                  [
-                    '(AD<sub>r</sub>) - absolútna diferencia (reťazová)',
-                    `\\(AD_{r} = N_{1} - N_{0}\\)`,
-                  ],
-                ]}
-                data={[
-                  retazovyIndexNakladov[index],
-                  absolutnaDiferenciaNakladov[index],
-                ]}
-              />
-            </Paper>
-          </>
+            <TableStatic
+              corner={'Ekonomické ukazovatele'}
+              header={betweenYears}
+              inputs={[
+                [
+                  '(I<sub>r</sub>) - reťazový index',
+                  `\\(I_{r} = \\frac{N_{i+1}}{N_{i}}\\)`,
+                ],
+                [
+                  '(AD<sub>r</sub>) - absolútna diferencia (reťazová)',
+                  `\\(AD_{r} = N_{i+1} - N_{i}\\)`,
+                ],
+              ]}
+              data={[
+                retazovyIndexNakladov[index],
+                absolutnaDiferenciaNakladov[index],
+              ]}
+              newPageAfter={false}
+            />
+          </Paper>
         ))}
       </div>
 
-      <Spacer height={40} />
+      <Spacer height={80} />
 
       <Paper>
         <TableStatic
@@ -149,19 +149,20 @@ export default function IndexResult() {
           header={headers.slice(1).map((h) => h.label)}
           inputs={[
             [
-              '(N<sub>c</sub>) - náklady celkom (€)',
-              `\\(N_{c}\\) = \\(\\sum N\\)`,
-            ],
-            [
               '(V<sub>c</sub>) - výnosy celkom (€)',
               `\\(V_{c}\\) = \\(\\sum V\\)`,
             ],
+            [
+              '(N<sub>c</sub>) - náklady celkom (€)',
+              `\\(N_{c}\\) = \\(\\sum N\\)`,
+            ],
           ]}
-          data={[costSumsForYears, incomeSumsForYears]}
+          data={[incomeSumsForYears, costSumsForYears]}
+          newPageAfter={false}
         />
       </Paper>
 
-      <Spacer height={40} />
+      <Spacer height={20} />
 
       <Paper>
         <TableStatic
@@ -174,7 +175,7 @@ export default function IndexResult() {
             ],
             [
               '(P<sub>zv</sub>) - percento zmeny výnosov (%)',
-              `\\(P_{zn} = (\\frac{V_{i+1}}{V_{i}} \\times 100) - 100\\)`,
+              `\\(P_{zv} = (\\frac{V_{i+1}}{V_{i}} \\times 100) - 100\\)`,
             ],
             [
               '(K<sub>r</sub>) - koeficient reakcie',
@@ -196,10 +197,10 @@ export default function IndexResult() {
                   handleSelectChange(index, e.target.value as string)
                 }
                 options={[
-                  'proporcionálny',
-                  'degresívny',
-                  'progresívny',
-                  'regresívny',
+                  'proporcionálny (Kr=1)',
+                  'degresívny (0<Kr<1)',
+                  'progresívny (Kr>1)',
+                  'regresívny (Kr≤0)',
                 ]}
               />
             )),

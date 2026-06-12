@@ -67,7 +67,7 @@ const setupUpdater = () => {
   });
 };
 
-const installExtensions = async () => {
+/*const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
@@ -78,11 +78,11 @@ const installExtensions = async () => {
       forceDownload,
     )
     .catch(console.log);
-};
+};*/
 
 const createWindow = async () => {
   if (import.meta.env.DEV) {
-    await installExtensions();
+    //await installExtensions();
   }
 
   const RESOURCES_PATH = app.isPackaged

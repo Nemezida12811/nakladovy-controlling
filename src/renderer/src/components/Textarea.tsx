@@ -1,12 +1,13 @@
 import {
-  debounce,
   styled,
   TextareaAutosize,
   useTheme as useMuiTheme,
+  debounce,
 } from '@mui/material';
 import { useTheme } from './providers/ThemeProvider';
 import { RootSelectors } from '@renderer/store/store';
 import { useAppDispatch, useAppSelector } from '@renderer/store/hooks';
+import { useEffect, useState, useRef } from 'react';
 
 const StyledTextareaAutosize = styled(TextareaAutosize)`
   &::placeholder {
@@ -20,33 +21,48 @@ type Props = {
   selectors: RootSelectors;
   actions: any;
   className?: string;
+  textSelector?: (state: any) => string;
+  actionCreator?: (text: string) => any;
+  placeholder?: string;
 };
 
-const Textarea: React.FC<Props> = ({ selectors, actions, className }) => {
+const Textarea: React.FC<Props> = ({
+                                     selectors,
+                                     actions,
+                                     className,
+                                     textSelector,
+                                     actionCreator,
+                                     placeholder = "Sem napíšte záver a zhodnotenie analýzy..."
+                                   }) => {
   const theme = useMuiTheme();
   const { mode } = useTheme();
   const dispatch = useAppDispatch();
 
-  const text = useAppSelector(selectors.text);
+  const selectorToUse = textSelector ?? selectors.textEvaluation;
+  const reduxText = useAppSelector(selectorToUse) || '';
+  const [localText, setLocalText] = useState(reduxText);
+  const debouncedDispatchRef = useRef(
+    debounce((value: string) => {
+      dispatch(actionCreator ? actionCreator(value) : actions.changeText(value));
+    }, 500)
+  );
 
-  const debouncedOnChange = (value: string) => {
-    dispatch(actions.changeText(value));
-  };
-
-  const onChangeDebounced = debounce(debouncedOnChange, 1000);
+  useEffect(() => {
+    setLocalText(reduxText);
+  }, [reduxText]);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChangeDebounced(event.target.value ?? '');
+    const value = event.target.value ?? '';
+    setLocalText(value);
+    debouncedDispatchRef.current(value);
   };
 
   return (
     <StyledTextareaAutosize
       className={className}
-      defaultValue={text}
-      onChange={(e) => {
-        handleChange(e);
-      }}
-      placeholder="Sem napíšte záver a zhodnotenie analýzy..."
+      value={localText}
+      onChange={handleChange}
+      placeholder={placeholder}
       minRows={6}
       style={{
         fontSize: '16px',

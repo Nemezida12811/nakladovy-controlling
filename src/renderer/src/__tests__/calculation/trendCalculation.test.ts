@@ -1,6 +1,6 @@
 import { trendCalculation } from '@renderer/pages/trend/trendCalculation';
 
-describe('economicCalculation', () => {
+describe('trendCalculation', () => {
   let result: ReturnType<typeof trendCalculation>;
   const data = [
     [5, 7, 5],

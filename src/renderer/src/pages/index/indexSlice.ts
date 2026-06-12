@@ -13,6 +13,7 @@ import { allOptions, customOption } from '@renderer/chartOfAccounts';
 import isEqual from 'lodash.isequal';
 
 const initialIndexState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 3,
   title: 'Analýza reťazových a bázických indexov',
   corner: 'Ekonomická veličina (€)',
@@ -65,7 +66,7 @@ const initialIndexState: DefaultState = {
   hasAnalytic: true,
   dynRows: true,
   dynCols: true,
-  newRowType: CellType.NUMBER,
+  newRowType: CellType.NUMBER
 };
 
 export const indexSlice = createSlice({
@@ -79,6 +80,8 @@ export const indexSlice = createSlice({
       state.items = initialIndexState.items;
       state.values = initialIndexState.values;
       state.text = initialIndexState.text;
+      state.textConclusion = initialIndexState.textConclusion;
+      state.textEvaluation = initialIndexState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,
@@ -134,6 +137,14 @@ export const selectors: RootSelectors = {
   ),
   text: createSelector(
     [(state: RootState) => state.index.text],
+    (text) => text,
+  ),
+  textConclusion: createSelector(
+    [(state: RootState) => state.index.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.index.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

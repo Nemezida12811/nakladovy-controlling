@@ -1,6 +1,6 @@
 import { variationCalculation } from '@renderer/pages/variation/variationCalculation';
 
-describe('economicCalculation', () => {
+describe('variationCalculation', () => {
   let result: ReturnType<typeof variationCalculation>;
   const data = [
     [6, 5],

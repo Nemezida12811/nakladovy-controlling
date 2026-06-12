@@ -17,6 +17,7 @@ import {
 import isEqual from 'lodash.isequal';
 
 const initialEconomicState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 1,
   title: 'Ekonomická analýza hospodárenia',
   corner: 'Ekonomická veličina (€)',
@@ -51,7 +52,7 @@ const initialEconomicState: DefaultState = {
   dynRows: true,
   dynCols: true,
   itemSelectOptions: allOptions,
-  newRowType: CellType.NUMBER,
+  newRowType: CellType.NUMBER
 };
 
 export const economicSlice = createSlice({
@@ -65,6 +66,8 @@ export const economicSlice = createSlice({
       state.items = initialEconomicState.items;
       state.values = initialEconomicState.values;
       state.text = initialEconomicState.text;
+      state.textConclusion = initialEconomicState.textConclusion;
+      state.textEvaluation = initialEconomicState.textEvaluation;
     },
     ...openProject,
     ...changeAccount,
@@ -118,8 +121,12 @@ export const selectors: RootSelectors = {
     [(state: RootState) => state.economic.dynCols],
     (dynCols) => dynCols,
   ),
-  text: createSelector(
-    [(state: RootState) => state.economic.text],
+  textConclusion: createSelector(
+    [(state: RootState) => state.economic.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.economic.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

@@ -7,7 +7,6 @@ export const variationCalculation = (data: number[][]) => {
 
   data.forEach((rowData, idx) => {
     plan[idx] = formatNumber(rowData[0]);
-
     reality[idx] = formatNumber(rowData[1]);
   });
 
@@ -18,10 +17,13 @@ export const variationCalculation = (data: number[][]) => {
     new Array(plan.length).fill(100),
   );
 
+  const percentualnaOdchylka = plneniePlanu.map((value) => value - 100);
+
   return {
     absolutnaDiferencia: absolutnaDiferencia.map(formatNumber),
     plneniePlanu: plneniePlanu
       .map(formatNumber)
       .map((value) => Math.ceil(value)),
+    percentualnaOdchylka: percentualnaOdchylka.map(formatNumber).map(Math.ceil),
   };
 };

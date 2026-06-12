@@ -42,6 +42,7 @@ const TrendResult = () => {
               '&:not(:last-child)': {
                 marginBottom: '40px',
               },
+              pageBreakInside: 'avoid',
             }}
           >
             <Typography

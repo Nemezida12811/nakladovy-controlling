@@ -1,0 +1,15 @@
+* [33me73ec23[m[33m ([m[1;31mupstream/gh-pages[m[33m)[m deploy: 3e3501dbe3cf8977d77e0cb40693c8b374d78d7b
+* [33mdd03650[m deploy: caf524df793c82187915ccd91580c5b2b6e7361a
+* [33m13e3e85[m deploy: 560db6d18c4682327cbf831278c86a464406d79f
+* [33mc7392b1[m deploy: 2206823903ea88a0d3bc2122052a51f3600e9375
+* [33m5b277fd[m deploy: ff5d1fc6302b95488b63ca1130b80cbf660976cd
+* [33m1c6dc6c[m deploy: ad5a5d91b94a37410d27eeb037c7437ebd05c046
+* [33mf7e8355[m deploy: 024cc3dc79dd82e8efe62e3d890fef605f12baaa
+* [33m3e3501d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;33mtag: [m[1;33mv3.0.2[m[33m, [m[1;31mupstream/main[m[33m, [m[1;31mupstream/HEAD[m[33m, [m[1;31morigin/main[m[33m)[m version
+* [33m58a4d3f[m fix
+* [33m560db6d[m change
+* [33mcaf524d[m[33m ([m[1;33mtag: [m[1;33mv3.0.0[m[33m)[m fix
+* [33m2206823[m updated app version
+* [33mac163aa[m remove GH_TOKEN environment variable from CI workflows
+* [33mc550a2b[m make mathjax available offline
+* [33mc7de58c[m not checking for updates on macOS

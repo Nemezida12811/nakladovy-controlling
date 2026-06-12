@@ -83,8 +83,8 @@ export default function StructureResult() {
       <Paper>
         <TableStatic
           corner={'Druhové náklady'}
-          header={['(Nj) - náklady jednotkové (€)', '(Š) - štruktúra (%)']}
-          inputs={[...items.filter(Boolean).map((i) => [i, '']), ['Spolu', '']]}
+          header={['(Nd) - náklady druhové (€)', '(Š) - štruktúra (%)']}
+          inputs={[...items.filter(Boolean).map((i) => [i, '']), ['(Nc) náklady celkové (€)', '']]}
           data={transposeMatrix([
             [
               ...rowSums.map((value: number) => value.toString()),
@@ -94,7 +94,7 @@ export default function StructureResult() {
               ...rowSums.map((value: number) => {
                 if (totalCost === 0) return '100';
                 return (
-                  Math.round((value / totalCost) * 10000) / 100
+                  Math.round((value / totalCost) * 100)
                 ).toString();
               }),
               '100',
@@ -107,8 +107,8 @@ export default function StructureResult() {
 
       <Paper>
         <TableStatic
-          corner={'Kalkulačné náklady'}
-          inputs={[...headers.map((h) => [h.label, '']), ['SPOLU', '']]}
+          corner={'(Nk) – náklady kalkulačné (€)'}
+          inputs={[...headers.map((h) => [h.label, '']), ['(Nc) náklady celkové (€)', '']]}
           header={['(Nj) - náklady jednotkové (€)', '(Š) - štruktúra (%)']}
           data={transposeMatrix([
             [
@@ -119,7 +119,7 @@ export default function StructureResult() {
               ...colSums.map((value: number) => {
                 if (totalCost === 0) return '100';
                 return (
-                  Math.round((value / totalCost) * 10000) / 100
+                  Math.round((value / totalCost) * 100)
                 ).toString();
               }),
               '100',
@@ -154,7 +154,8 @@ export default function StructureResult() {
               values: [rowSums[index]],
             }))}
             yAxisLabel="náklady (€)"
-            showValueInBar={true}
+            showValueInBar={false}
+            labelsOnTop={true}
           />
         </Grid>
 
@@ -171,7 +172,7 @@ export default function StructureResult() {
 
         <Grid item xs={12} md={6}>
           <BarGraph
-            title="Kalkulačné náklady (€)"
+            title="(Nk) – náklady kalkulačné (€)"
             height={420}
             labels={['']}
             data={headers.filter(Boolean).map((header, index) => ({
@@ -179,7 +180,8 @@ export default function StructureResult() {
               values: [colSums[index]],
             }))}
             yAxisLabel="náklady (€)"
-            showValueInBar={true}
+            showValueInBar={false}
+            labelsOnTop={true}
           />
         </Grid>
       </Grid>

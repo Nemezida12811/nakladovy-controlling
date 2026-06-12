@@ -16,6 +16,10 @@ export enum RouteName {
   TREND_ANALYSIS = '/trendAnalysis',
   VARIATION_ANALYSIS = '/variationAnalysis',
   TAX_ANALYSIS = '/taxAnalysis',
+  PROFITABILITY_ANALYSIS = '/profitabilityAnalysis',
+  ACTIVITY_ANALYSIS = '/activityAnalysis',
+  DEBTS_ANALYSIS = '/debtsAnalysis',
+  LIQUIDITY_ANALYSIS = '/liquidityAnalysis',
   EVALUATION = '/evaluation',
 }
 
@@ -74,6 +78,31 @@ export const routes: { [key in RouteName]: Route } = {
     title: 'Daňová analýza nákladov',
     printToPDF: true,
     save: true,
+
+  },
+  [RouteName.PROFITABILITY_ANALYSIS]: {
+    title: 'Finančná analýza rentability',
+    printToPDF: true,
+    save: true,
+
+  },
+  [RouteName.ACTIVITY_ANALYSIS]: {
+    title: 'Finančná analýza aktivity',
+    printToPDF: true,
+    save: true,
+
+  },
+  [RouteName.DEBTS_ANALYSIS]: {
+    title: 'Finančná analýza zadlženosti',
+    printToPDF: true,
+    save: true,
+
+  },
+  [RouteName.LIQUIDITY_ANALYSIS]: {
+    title: 'Finančná analýza likvidity',
+    printToPDF: true,
+    save: true,
+
   },
   [RouteName.EVALUATION]: {
     title: 'Report',

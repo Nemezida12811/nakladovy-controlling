@@ -16,6 +16,7 @@ import { RootSelectors, RootState } from '@renderer/store/store';
 import isEqual from 'lodash.isequal';
 
 const initialVariationState: DefaultState = {
+  textConclusion: '', textEvaluation: '',
   id: 1,
   title: 'Odchýlková analýza nákladov',
   corner: 'Ekonomická veličina (€)',
@@ -30,11 +31,16 @@ const initialVariationState: DefaultState = {
       type: CellType.STRING,
       label: 'Skutočnosť',
     },
+    {
+      id: '3',
+      type: CellType.STRING,
+      label: 'Rozpočtové obdobie',
+    },
   ],
   data: [
-    [0, 0],
-    [0, 0],
-    [0, 0],
+    [0, 0, 2000],
+    [0, 0, 2000],
+    [0, 0, 2000],
   ],
   items: [costOptions[0].label, profitOptions[0].label, ''],
   values: [
@@ -60,6 +66,10 @@ const initialVariationState: DefaultState = {
   dynCols: false,
   itemSelectOptions: allOptions,
   newRowType: CellType.NUMBER,
+  additionalData: {
+    selectValues: [],
+    selectValuesType: [],
+  }
 };
 
 export const variationSlice = createSlice({
@@ -73,6 +83,13 @@ export const variationSlice = createSlice({
       state.items = initialVariationState.items;
       state.values = initialVariationState.values;
       state.text = initialVariationState.text;
+      state.textConclusion = initialVariationState.textConclusion;
+      state.textEvaluation = initialVariationState.textEvaluation;
+    },
+    setAdditionalData: (state, action) => {
+      const { key, value } = action.payload;
+      if (!state.additionalData) state.additionalData = {};
+      state.additionalData[key] = value;
     },
     ...openProject,
     ...changeAccount,
@@ -127,6 +144,14 @@ export const selectors: RootSelectors = {
   ),
   text: createSelector(
     [(state: RootState) => state.variation.text],
+    (text) => text,
+  ),
+  textConclusion: createSelector(
+    [(state: RootState) => state.variation.textConclusion],
+    (text) => text,
+  ),
+  textEvaluation: createSelector(
+    [(state: RootState) => state.variation.textEvaluation],
     (text) => text,
   ),
   items: createSelector(

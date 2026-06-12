@@ -60,6 +60,26 @@ import { taxActions, selectors as taxSelectors } from './pages/tax/taxSlice';
 import TaxResult from './pages/tax/TaxResult';
 import ProjectProvider from './components/providers/ProjectProvider';
 import UpdateSnackbarProvider from './components/providers/UpdateSnackbarProvider';
+import {
+  profitabilityActions,
+  selectors as profitabilitySelectors,
+} from './pages/profitability/profitabilitySlice';
+import ProfitabilityResult from './pages/profitability/ProfitabilityResult';
+import {
+  activityActions,
+  selectors as activitySelectors,
+} from './pages/activity/activitySlice';
+import ActivityResult from './pages/activity/ActivityResult';
+import {
+  debtsActions,
+  selectors as debtsSelectors,
+} from './pages/debts/debtsSlice';
+import DebtsResult from './pages/debts/DebtsResult';
+import {
+  liquidityActions,
+  selectors as liquiditySelectors,
+} from './pages/liquidity/liquiditySlice';
+import LiquidityResult from './pages/liquidity/LiquidityResult';
 
 export default function App() {
   const EconomicAnalysis: () => JSX.Element = withAnalysis(
@@ -134,6 +154,38 @@ export default function App() {
     TaxResult,
     RouteName.TAX_ANALYSIS,
   );
+  const ProfitabilityAnalysis: () => JSX.Element = withAnalysis(
+    profitabilitySelectors,
+    profitabilityActions,
+    ItemValue,
+    HeaderInput,
+    ProfitabilityResult,
+    RouteName.PROFITABILITY_ANALYSIS,
+  );
+  const ActivityAnalysis: () => JSX.Element = withAnalysis(
+    activitySelectors,
+    activityActions,
+    ItemValue,
+    HeaderInput,
+    ActivityResult,
+    RouteName.ACTIVITY_ANALYSIS,
+  );
+  const DebtsAnalysis: () => JSX.Element = withAnalysis(
+    debtsSelectors,
+    debtsActions,
+    ItemValue,
+    HeaderInput,
+    DebtsResult,
+    RouteName.DEBTS_ANALYSIS,
+  );
+  const LiquidityAnalysis: () => JSX.Element = withAnalysis(
+    liquiditySelectors,
+    liquidityActions,
+    ItemValue,
+    HeaderInput,
+    LiquidityResult,
+    RouteName.LIQUIDITY_ANALYSIS,
+  );
 
   return (
     <MathJaxContext version={3} src="/mathjax.js">
@@ -191,6 +243,22 @@ export default function App() {
                           path={RouteName.TAX_ANALYSIS}
                           element={<TaxAnalysis />}
                         />
+                        <Route
+                          path={RouteName.PROFITABILITY_ANALYSIS}
+                          element={<ProfitabilityAnalysis />}
+                        />
+                        <Route
+                          path={RouteName.ACTIVITY_ANALYSIS}
+                          element={<ActivityAnalysis />}
+                        />
+                        <Route
+                          path={RouteName.DEBTS_ANALYSIS}
+                          element={<DebtsAnalysis />}
+                        />
+                        <Route
+                          path={RouteName.LIQUIDITY_ANALYSIS}
+                          element={<LiquidityAnalysis />}
+                        />
 
                         <Route
                           path={RouteName.EVALUATION}
@@ -205,6 +273,10 @@ export default function App() {
                               TrendAnalysisPage={TrendAnalysis}
                               VariationAnalysisPage={VariationAnalysis}
                               TaxAnalysisPage={TaxAnalysis}
+                              ProfitabilityAnalysisPage={ProfitabilityAnalysis}
+                              ActivityAnalysisPage={ActivityAnalysis}
+                              DebtsAnalysisPage={DebtsAnalysis}
+                              LiquidityAnalysisPage={LiquidityAnalysis}
                             />
                           }
                         />

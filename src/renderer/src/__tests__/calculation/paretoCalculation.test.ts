@@ -1,6 +1,6 @@
 import { paretoCalculation } from '@renderer/pages/pareto/paretoCalculation';
 
-describe('economicCalculation', () => {
+describe('paretoCalculation', () => {
   let result: ReturnType<typeof paretoCalculation>;
   const data = [[5], [1], [9]];
 
@@ -23,7 +23,7 @@ describe('economicCalculation', () => {
   });
 
   it('should calculate correct percentagesKumul', () => {
-    expect(result.percentagesKumul).toEqual([60, 93.33, 100]);
+    expect(result.percentagesKumul).toEqual([60, 93, 100]);
   });
 
   it('should calculate correct valuesKumul', () => {

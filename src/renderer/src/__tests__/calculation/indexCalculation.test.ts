@@ -1,6 +1,6 @@
 import { indexCalculation } from '@renderer/pages/index/indexCalculation';
 
-describe('economicCalculation', () => {
+describe('indexCalculation', () => {
   let result: ReturnType<typeof indexCalculation>;
   const data = [
     [6, 5, 1],
@@ -67,6 +67,6 @@ describe('economicCalculation', () => {
   });
 
   it('should calculate correct betweenYears', () => {
-    expect(result.betweenYears).toEqual(['2000/2001']);
+    expect(result.betweenYears).toEqual(['2001/2000']);
   });
 });
