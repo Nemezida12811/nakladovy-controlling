@@ -44,7 +44,7 @@ const initialCVPState: CVPState = {
     },
     {
       id: '6',
-      value: '(Z<sub>min</sub>) – zisk minimálny (€)',
+      value: '(Zₘᵢₙ) – zisk minimálny (€)',
     },
   ],
   items: [
@@ -53,7 +53,7 @@ const initialCVPState: CVPState = {
     '(Pc) - predajná cena jednotková (€)',
     '(Nvj) - variabilné náklady jednotkové (€)',
     '(Nf) - fixné náklady (€)',
-    '(Z<sub>min</sub>) – zisk minimálny (€)',
+    '(Zₘᵢₙ) – zisk minimálny (€)',
   ],
   rowTypes: [
     CellType.NUMBER,

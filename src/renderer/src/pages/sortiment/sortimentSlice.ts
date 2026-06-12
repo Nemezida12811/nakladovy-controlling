@@ -24,9 +24,9 @@ const initialSortimentState: DefaultState = {
   items: [
     '(Q) - objem výroby',
     'merná jednotka (množstvo)',
-    '(N<sub>p</sub>) - priame náklady (€)',
+    '(Nₚ) - priame náklady (€)',
     '(ÚVNV) -  úplné vlastné náklady výkonu (€)',
-    '(P<sub>cj</sub>) - predajná cena (jednotková) (€)'
+    '(P꜀ⱼ) - predajná cena (jednotková) (€)'
   ],
   values: [
     {
@@ -39,7 +39,7 @@ const initialSortimentState: DefaultState = {
     },
     {
       id: '3',
-      value: '(N<sub>p</sub>) - priame náklady (€)',
+      value: '(Nₚ) - priame náklady (€)',
     },
     {
       id: '4',
@@ -47,7 +47,7 @@ const initialSortimentState: DefaultState = {
     },
     {
       id: '5',
-      value: '(P<sub>cj</sub>) - predajná cena (jednotková) (€)',
+      value: '(P꜀ⱼ) - predajná cena (jednotková) (€)',
     },
     {
       id: '6',

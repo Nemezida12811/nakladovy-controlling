@@ -40,7 +40,7 @@ export default function ActivityResult() {
             ['Doba obratu záväzkov (dni)', `\\( D_{Zk} = \\frac{Zk}{T} \\times 365 \\)`],
             ['Doba obratu dlhodobého majetku (stálych aktív) (dni)', `\\( D_{DM} = \\frac{DM}{T} \\times 365 \\)`],
             ['Doba obratu celkových aktív (dni)', `\\( D_{A} = \\frac{A}{T} \\times 365 \\)`],
-            ['Celkový obrat aktív ()', `\\( COA = \\frac{T}{A} \\)`],
+            ['Celkový obrat aktív (koeficient)', `\\( COA = \\frac{T}{A} \\)`],
 
           ]}
           data={[totalCapital, turnoverTotalCapital, turnoverEquity,

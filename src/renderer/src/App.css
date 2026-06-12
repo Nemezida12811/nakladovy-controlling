@@ -498,20 +498,15 @@ textarea {
         padding-left: 0 !important;
     }
 
-    .MuiPaper-root {
-        margin-left: 30px !important;
-    }
-
     * {
+        margin-left: 2px !important;
       overflow: visible !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
       color-adjust: exact !important;
   }
 
-  body.web-version .MuiTable-root {
-      zoom: 2;
-  }
+
 
   body.web-version .task-container {
       zoom: 3;
