@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/nakladovy-controlling/sw.js', { scope: '/nakladovy-controlling/' })})}
